@@ -20,6 +20,10 @@ void SeniorProject::on_back_clicked()
     if(ui->source->url() != url)
     {
         ui->source->back();
+        if (prog == 5) {
+            ui->source->back();
+        }
+        qDebug() << ui->source->url();
     }
 }
 
@@ -28,3 +32,13 @@ void SeniorProject::on_forward_clicked()
     ui->source->forward();
 }
 
+void SeniorProject::on_source_urlChanged(const QUrl &arg1)
+{
+    if (prog == 5) {
+        QString id = "#js-repo-pjax-container";
+        QString url = arg1.toString() + id;
+        if (! url.contains("#js-repo-pjax-container#js-repo-pjax-container"))
+            ui->source->setUrl(url);
+        qDebug() << url;
+    }
+}

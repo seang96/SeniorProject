@@ -9,6 +9,8 @@ QT += multimedia multimediawidgets webkitwidgets
 
 TARGET = SeniorProject
 
+LIBS += -L"C:/OpenSSL-Win32/bin" -llibeay32
+
 CONFIG += mobility c++11
 
 VERSION_MAJOR = 1

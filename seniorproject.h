@@ -106,6 +106,8 @@ private slots:
 
     void on_program_SPL_clicked();
 
+    void on_source_urlChanged(const QUrl &arg1);
+
 private:
     Ui::SeniorProject *ui;
     About *about;

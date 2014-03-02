@@ -99,7 +99,7 @@ void SeniorProject::on_program_FizzBuzz_clicked()
 
 void SeniorProject::on_program_SPL_clicked()
 {
-    url = "qrc:/html/html/SPL.html";
+    url = "https://github.com/seang96/SeniorProject#js-repo-pjax-container";
     qDebug() << url;
     ui->Information->setTabEnabled(1, false);
     ui->source->setUrl(url);
