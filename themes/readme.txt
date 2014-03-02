@@ -60,17 +60,32 @@ Now that the basics on how to style certain objects, an entire class (Class name
 
 Key:
 Class Name - Object Name
-
-QWidget - widget (any styling to this would be the entire program)
+==================FIRST RUN/LANGUAGE WINDOW==================
+QWidget - language
+	QPushButton - OK
+	QGroupBox - groupBox
+	QRadioButton - English
+	QRadioButton - French
+	QRadioButton - Spanish
+	QGraphicsView - graphicsView
+	QGraphicsView - graphicsView_2
+	QGraphicsView - graphicsView_3
+==================MAIN WINDOW==================
+QWidget - widget (any styling to QWidget without #widget would be the entire program)
 	QFrame - Options
 		QPushButton - About
 		QComboBox - Language_box
 		QLabel - Language_label
 		QLabel - Options_2
+		qPushButton - ThemeButton
 		QComboBox - Theme_box
 		QLabel - Theme_label
 		QLabel - Update
+		QPushButton - Updater_Reset
 		QPushButton - Updater_button
+		QToolButton - browseButton
+		QCheckBox - checkForUpdatesOnStart
+		QLineEdit - installdir
 	QPushButton - closeoptions
 	QFrame - controlLayout
 		QPushButton - playButton
@@ -108,5 +123,36 @@ QWidget - widget (any styling to this would be the entire program)
 				QPushButton - forward
 				QWebView - source
 		QPushButton - Run
+==================ABOUT WINDOW==================
+QDialog - About
+	QPushButton - aboutqt
+	QTabWidget - abouttabs
+	QWidget - info
+		QTextBrowser - InfoText
+		QLabel - spl_ver
+	QWidget - credits
+		QWebView - CreditsText
+	QWidget - license
+		QWebView - webView
+	QPushButton - ok
+	==================UPDATER MAIN WINDOW==================
+QWidget - FvUpdateWindow
+	QVBoxLayout - verticalLayout
+		QHBoxLayout - horizontalLayout_3
+			Spacer - horizontalSpacer
+			QPushButton - installUpdateButton
+			QPushButton - remindMeLaterButton
+		QGroupBox - groupBox
+			QWebView - releaseNotesWebView
+		QLabel - newVersionIsAvailableLabel
+		QLabel - wouldYouLikeToDownloadLabel
+==================UPDATER CONFIRM DIALOG WINDOW==================
+QDialog - FvUpdateConfirmDialog
+	QDialogButtonBox - confirmButtonBox
+	QLabel - downloadthisUpdateLabel
+	QLabel - updateFilesLocatedLabel
+	QLabel - updateFileLinkLabel
+	QLabel - whenYouClickOkLabel
 
-Special thanks to mart3323 for creating a few themes.
+
+Special thanks to mart3323 and Christine for creating a few themes.
