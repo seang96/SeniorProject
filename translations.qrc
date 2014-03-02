@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>Translations/spl_fr.qm</file>
+        <file>Translations/spl_en-us.qm</file>
+        <file>Translations/spl_es.qm</file>
+    </qresource>
+</RCC>

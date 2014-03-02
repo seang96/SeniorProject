@@ -1,0 +1,109 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+#	new file:   .gitattributes
+#	new file:   .gitignore
+#	new file:   FizzBuzz.exe
+#	new file:   Pictures.qrc
+#	new file:   SPL.ico
+#	new file:   SPL.png
+#	new file:   SeniorProject.pro
+#	new file:   SeniorProject.pro.user.3.0-pre1
+#	new file:   Translations/lupdate.exe - Shortcut.lnk
+#	new file:   Translations/spl_en-us.qm
+#	new file:   Translations/spl_en-us.ts
+#	new file:   Translations/spl_es.qm
+#	new file:   Translations/spl_es.ts
+#	new file:   Translations/spl_fr.qm
+#	new file:   Translations/spl_fr.ts
+#	new file:   about.cpp
+#	new file:   about.h
+#	new file:   about.ui
+#	new file:   animation.cpp
+#	new file:   en.png
+#	new file:   es.png
+#	new file:   fervor/.gitattributes
+#	new file:   fervor/.gitignore
+#	new file:   fervor/CMakeLists.txt
+#	new file:   fervor/Fervor.pri
+#	new file:   fervor/LICENSE
+#	new file:   fervor/README.mdown
+#	new file:   fervor/fervor_lt.qm
+#	new file:   fervor/fervor_lt.ts
+#	new file:   fervor/fvavailableupdate.cpp
+#	new file:   fervor/fvavailableupdate.h
+#	new file:   fervor/fvignoredversions.cpp
+#	new file:   fervor/fvignoredversions.h
+#	new file:   fervor/fvplatform.cpp
+#	new file:   fervor/fvplatform.h
+#	new file:   fervor/fvupdateconfig.h.sample
+#	new file:   fervor/fvupdateconfirmdialog.cpp
+#	new file:   fervor/fvupdateconfirmdialog.h
+#	new file:   fervor/fvupdateconfirmdialog.ui
+#	new file:   fervor/fvupdater.cpp
+#	new file:   fervor/fvupdater.h
+#	new file:   fervor/fvupdatewindow.cpp
+#	new file:   fervor/fvupdatewindow.h
+#	new file:   fervor/fvupdatewindow.ui
+#	new file:   fervor/fvversioncomparator.cpp
+#	new file:   fervor/fvversioncomparator.h
+#	new file:   fervor/sample/Appcast.xml
+#	new file:   fervor/sample/CMakeLists.txt
+#	new file:   fervor/sample/RelNotes.html
+#	new file:   fervor/sample/Sample.pro
+#	new file:   fervor/sample/main.cpp
+#	new file:   fervor/sample/mainwindow.cpp
+#	new file:   fervor/sample/mainwindow.h
+#	new file:   fervor/sample/mainwindow.ui
+#	new file:   fervor/sample/sample.icns
+#	new file:   fervor/sample/sample.ico
+#	new file:   fervor/sample/sample.png
+#	new file:   fervor/sample/sample.rc
+#	new file:   fervor/sample/sample.svg
+#	new file:   fervor/tests/CMakeLists.txt
+#	new file:   fervor/tests/fvversioncomparatortest.cpp
+#	new file:   fervor/tests/fvversioncomparatortest.h
+#	new file:   fizzbuzz.png
+#	new file:   flashdrive.png
+#	new file:   fr.png
+#	new file:   global.h
+#	new file:   html.qrc
+#	new file:   main.cpp
+#	new file:   mcuhelper.png
+#	new file:   options.cpp
+#	new file:   program_buttons.cpp
+#	new file:   programs.qrc
+#	new file:   prop.rc
+#	new file:   run_programs.cpp
+#	new file:   select_language.cpp
+#	new file:   select_language.h
+#	new file:   select_language.ui
+#	new file:   seniorproject.cpp
+#	new file:   seniorproject.h
+#	new file:   seniorproject.ui
+#	new file:   spl.rc
+#	new file:   themes/default/theme.style
+#	new file:   themes/orange/readme.txt
+#	new file:   themes/orange/theme.style
+#	new file:   themes/readme.txt
+#	new file:   theming.cpp
+#	new file:   tradingpost.png
+#	new file:   translations.qrc
+#	new file:   videoplayer_controls.cpp
+#	new file:   webbrowser.cpp
+#	new file:   window.cpp
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	html/
+#	movie.flv
+#	setup.exe
+

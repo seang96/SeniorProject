@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1376457764 source:d:\projects\accessflashdrive\source.cpp
+	<windows.h>
+	<string>
+	<iostream>
+

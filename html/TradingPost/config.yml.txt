@@ -1,0 +1,15 @@
+#If you want to have a limit on how many items can be selling at the same time put this to true and configure the MaxTransactions to the max about you desire, otherwise false.
+#WARNING: If this is set to false or if MaxTransactions is a high number depending on your disk read/write speed commands might take a while or cause server lag. The highest number possible is roughly above 2,500,000,000
+UseMaxTransactions: false
+MaxTransactions: 999999999
+
+#Taxes is calculated in percentage
+Taxes: 15
+
+#AutoConfirm Setting - user is required to type confirm after a sell or buy command unless if they change the setting for themselves
+#false = required
+#true = not required
+AutoConfirm: false
+
+#Debug mode true/false
+Debug: true

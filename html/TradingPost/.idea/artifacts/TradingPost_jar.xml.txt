@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="TradingPost:jar">
+    <output-path>$PROJECT_DIR$/../dist/plugins/</output-path>
+    <root id="archive" name="TradingPost.jar">
+      <element id="module-output" name="TradingPost" />
+      <element id="file-copy" path="$PROJECT_DIR$/plugin.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/users.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/data.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/config.yml" />
+      <element id="library" level="module" name="craftbukkit.jar" module-name="TradingPost" />
+    </root>
+  </artifact>
+</component>

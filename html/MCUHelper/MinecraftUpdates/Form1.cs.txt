@@ -1,0 +1,542 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Net;
+using System.Net.Sockets;
+using System.IO;
+using System.Reflection;
+using System.Diagnostics;
+
+namespace MinecraftUpdates
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            textBox1.BackColor = this.BackColor;
+            label1.Parent = pictureBox1;
+            label2.Parent = pictureBox1;
+            label3.Parent = pictureBox1;
+            button1.Parent = pictureBox1;
+            button2.Parent = pictureBox1;
+            button3.Parent = pictureBox1;
+            button4.Parent = pictureBox1;
+            button5.Parent = pictureBox1;
+            button6.Parent = pictureBox1;
+            button7.Parent = pictureBox1;
+        }
+
+        string uptodate = new WebClient().DownloadString("http://spgrn.com/updater/uptodate.txt");
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            textBox1.Text = uptodate;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        bool CheckServer(string server)
+        {
+            try
+            {
+                new TcpClient().Connect(server.Split(':')[0], int.Parse(server.Split(':')[1]));
+                return true;
+            }
+            catch { return false; }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            TcpClient MinecraftServer = new TcpClient();
+            textBox2.Text = (CheckServer("5.9.70.210:25562") ? "Online" : "Offline");
+            textBox2.Visible = true;
+            timer2.Enabled = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int download = 1;
+            int use = 1;
+            string path = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.minecraft" + "\\bin\\minecraft.jar");
+            string path2 = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.minecraft" + "\\bin\\backup_minecraft.jar");
+            string path3 = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.minecraft" + "\\bin\\mcu_minecraft.jar");
+            if (File.Exists(path2))
+            {
+                textBox3.Text = "There already is a backup_minecraft.jar. Please click the Revert button first.";
+                textBox3.Visible = true;
+                timer4.Enabled = true;
+                download = 0;
+                use = 0;
+            }
+            if (File.Exists(path3))
+            {
+                textBox3.Text = "mcu_minecraft.jar found, asking confirmation.";
+                textBox3.Visible = true;
+                timer4.Enabled = true;
+                if (MessageBox.Show("If this file is old you may want to click yes and delete it in order to download the most current version.", "Confirm Deletion", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    File.Delete(path3);
+                    textBox3.Text = "Downloading updates...";
+                    textBox3.Visible = true;
+                    timer4.Enabled = true;
+                }
+                else
+                {
+                    File.Move(path, path2);
+                    File.Move(path3, path);
+                    textBox3.Text = "Downgrade succuess.";
+                    textBox3.Visible = true;
+                    timer4.Enabled = true;
+                    download = 0;
+                    use = 0;
+                }
+            }
+            if (File.Exists(path) && (use == 1) && !File.Exists(path2))
+            {
+
+                textBox3.Text = "Moving original minecraft.jar to backup_minecraft.jar";
+                textBox3.Visible = true;
+                timer4.Enabled = true;
+                File.Move(path, path2);
+
+            }
+            if (download == 1)
+            {
+                backgroundWorker1.RunWorkerAsync(1);
+                textBox3.Text = "Downloading new minecraft.jar";
+                textBox3.Visible = true;
+                timer4.Enabled = true;
+                timer3.Enabled = true;
+            }
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string path = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.minecraft" + "\\bin\\minecraft.jar");
+            string path2 = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.minecraft" + "\\bin\\backup_minecraft.jar");
+            string path3 = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.minecraft" + "\\bin\\mcu_minecraft.jar");
+            int exists = 1;
+            if (File.Exists(path3))
+            {
+                textBox3.Text = "You are currently using your regular version.";
+                textBox3.Visible = true;
+                timer4.Enabled = true;
+            }
+            if (File.Exists(path2) && File.Exists(path))
+            {
+                textBox3.Text = "Found backup_minecraft.jar. Changing to minecraft.jar.";
+                textBox3.Visible = true;
+                timer4.Enabled = true;
+                File.Move(path, path3);
+                File.Move(path2, path);
+                exists = 0;
+            }
+            if (File.Exists(path2) && exists == 1)
+            {
+                File.Move(path2, path);
+            }
+        }
+        private void textBox3_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            string path = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper//Themes");
+            if (!Directory.Exists(path))
+            {
+                MessageBox.Show("The theme folder does not exist.\nCreating Theme directory and downloading contents now.", "Themes not found!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                DirectoryInfo di = Directory.CreateDirectory(path);
+            }
+            if (!File.Exists(path + "\\default.gif"))
+            {
+                string defaulttheme = new WebClient().DownloadString("http://spgrn.com/updater/themedefault.txt");
+                string defaultthemefilename = "default.gif", myStringWebResource = null;
+                Directory.SetCurrentDirectory(path);
+                WebClient myWebClient = new WebClient();
+                myStringWebResource = defaulttheme;
+                myWebClient.DownloadFile(myStringWebResource, defaultthemefilename);
+            }
+            if (!File.Exists(path + "\\unanimated.jpg"))
+            {
+                string unanimatedtheme = new WebClient().DownloadString("http://spgrn.com/updater/themeunanimated.txt");
+                string unanimatedthemefilename = "unanimated.jpg", myStringWebResourceunanimated = null;
+                Directory.SetCurrentDirectory(path);
+                WebClient myWebClientunanimated = new WebClient();
+                myStringWebResourceunanimated = unanimatedtheme;
+                myWebClientunanimated.DownloadFile(myStringWebResourceunanimated, unanimatedthemefilename);
+            }
+            if (!File.Exists(path + "\\olddefault.jpg"))
+            {
+                string olddefaulttheme = new WebClient().DownloadString("http://spgrn.com/updater/themeolddefault.txt");
+                string olddefaultthemefilename = "olddefault.jpg", myStringWebResourceolddefault = null;
+                Directory.SetCurrentDirectory(path);
+                WebClient myWebClientolddefault = new WebClient();
+                myStringWebResourceolddefault = olddefaulttheme;
+                myWebClientolddefault.DownloadFile(myStringWebResourceolddefault, olddefaultthemefilename);
+            }
+            if (Properties.Settings.Default.Theme == "Unanimated")
+            {
+                pictureBox1.Image = Image.FromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\Themes\\unanimated.jpg");
+                defaultToolStripMenuItem.Checked = false;
+                unanimatedToolStripMenuItem.Checked = true;
+                oldDefaultToolStripMenuItem.Checked = false;
+            }
+            if (Properties.Settings.Default.Theme == "OldDefault")
+            {
+                pictureBox1.Image = Image.FromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\Themes\\olddefault.jpg");
+                defaultToolStripMenuItem.Checked = false;
+                unanimatedToolStripMenuItem.Checked = false;
+                oldDefaultToolStripMenuItem.Checked = true;
+            }
+            if (Properties.Settings.Default.Theme == "Default")
+            {
+                pictureBox1.Image = Image.FromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\Themes\\default.gif");
+                defaultToolStripMenuItem.Checked = true;
+                unanimatedToolStripMenuItem.Checked = false;
+                oldDefaultToolStripMenuItem.Checked = false;
+            }
+            if (checkForUpdatesOnStartToolStripMenuItem.Checked && Properties.Settings.Default.updateonrun)
+            {
+                updater1.CheckForUpdates();
+            }
+            else
+            {
+                checkForUpdatesOnStartToolStripMenuItem.Checked = false;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (File.Exists("mineshafter.jar"))
+            {
+                System.Diagnostics.Process clientProcess = new Process();
+                clientProcess.StartInfo.RedirectStandardOutput = true;
+                clientProcess.StartInfo.UseShellExecute = false;
+                clientProcess.StartInfo.CreateNoWindow = true;
+                clientProcess.StartInfo.FileName = "java";
+                clientProcess.StartInfo.Arguments = @"-jar " + (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\mineshafter.jar");
+                clientProcess.Start();
+                textBox4.Text = "Mineshafter has been launched!";
+                textBox4.Visible = true;
+                timer5.Enabled = true;
+            }
+            else
+                {
+            textBox4.Text = "Downloading Mineshafter...";
+            textBox4.Visible = true;
+            timer5.Enabled = true;
+            string filepath = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper");
+            string mineshafter = new WebClient().DownloadString("http://spgrn.com/updater/mineshafter.txt");
+            string fileName = "mineshafter.jar", myStringWebResource = null;
+            Directory.SetCurrentDirectory(filepath);
+            WebClient myWebClient = new WebClient();
+            myStringWebResource = mineshafter;
+            myWebClient.DownloadFile(myStringWebResource, fileName);
+            System.Diagnostics.Process clientProcess = new Process();
+            clientProcess.StartInfo.RedirectStandardOutput = true;
+            clientProcess.StartInfo.UseShellExecute = false;
+            clientProcess.StartInfo.CreateNoWindow = true;
+            clientProcess.StartInfo.FileName = "java";
+            clientProcess.StartInfo.Arguments = @"-jar " + (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\mineshafter.jar");
+            clientProcess.Start();
+            textBox4.Text = "Mineshafter has been launched!";
+            textBox4.Visible = true;
+            timer5.Enabled = true;
+                }
+            }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (File.Exists("magiclauncher.jar"))
+            {
+                System.Diagnostics.Process clientProcess = new Process();
+                clientProcess.StartInfo.RedirectStandardOutput = true;
+                clientProcess.StartInfo.UseShellExecute = false;
+                clientProcess.StartInfo.CreateNoWindow = true;
+                clientProcess.StartInfo.FileName = "java";
+                clientProcess.StartInfo.Arguments = @"-jar " + (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\magiclauncher.jar");
+                clientProcess.Start();
+                textBox4.Text = "Magic Launcher has been launched!";
+                textBox4.Visible = true;
+                timer5.Enabled = true;
+            }
+            else
+            {
+            textBox4.Text = "Downloading Magic Launcher...";
+            textBox4.Visible = true;
+            timer5.Enabled = true;
+            string filepath = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper");
+            string magiclauncher = new WebClient().DownloadString("http://spgrn.com/updater/magiclauncher.txt");
+            string fileName = "magiclauncher.jar", myStringWebResource = null;
+            WebClient myWebClient = new WebClient();
+            Directory.SetCurrentDirectory(filepath);
+            myStringWebResource = magiclauncher;
+            myWebClient.DownloadFile(myStringWebResource, fileName);
+            System.Diagnostics.Process clientProcess = new Process();
+            clientProcess.StartInfo.RedirectStandardOutput = true;
+            clientProcess.StartInfo.UseShellExecute = false;
+            clientProcess.StartInfo.CreateNoWindow = true;
+            clientProcess.StartInfo.FileName = "java";
+            clientProcess.StartInfo.Arguments = @"-jar " + (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\magiclauncher.jar");
+            clientProcess.Start();
+            textBox4.Text = "Magic Launcher has been launched!";
+            textBox4.Visible = true;
+            timer5.Enabled = true;
+            }
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            foreach (System.Diagnostics.Process myProc in System.Diagnostics.Process.GetProcesses())
+            {
+                Process[] runingProcess = Process.GetProcesses();
+                for (int i = 0; i < runingProcess.Length; i++)
+                {
+                    // compare equivalent process by their name
+                    if (runingProcess[i].ProcessName == "java.exe")
+                    {
+                        // kill  running process
+                        runingProcess[i].Kill();
+                    }
+                    string filepath = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper");
+                    Directory.SetCurrentDirectory(filepath);
+                }
+                if (File.Exists("magiclauncher.jar"))
+                {
+                    File.Delete("magiclauncher.jar");
+                }
+                if (File.Exists("mineshafter.jar"))
+                {
+                    File.Delete("mineshafter.jar");
+                    File.Delete("minecraft.jar");
+                }
+                if (File.Exists("mineshaftersquared.jar"))
+                {
+                    File.Delete("mineshaftersquared.jar");
+                }
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (File.Exists("mineshaftersquared.jar"))
+            {
+                System.Diagnostics.Process clientProcess = new Process();
+                clientProcess.StartInfo.RedirectStandardOutput = true;
+                clientProcess.StartInfo.UseShellExecute = false;
+                clientProcess.StartInfo.CreateNoWindow = true;
+                clientProcess.StartInfo.FileName = "java";
+                clientProcess.StartInfo.Arguments = @"-jar " + (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\mineshaftersquared.jar");
+                clientProcess.Start();
+                textBox4.Text = "Mineshafter Squared has been launched!";
+                textBox4.Visible = true;
+                timer5.Enabled = true;
+            }
+            else
+            {
+            textBox4.Text = "Downloading Mineshafter Squared...";
+            textBox4.Visible = true;
+            timer5.Enabled = true;
+            string filepath = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper");
+            string mineshafter = new WebClient().DownloadString("http://spgrn.com/updater/mineshaftersquared.txt");
+            string fileName = "mineshaftersquared.jar", myStringWebResource = null;
+            Directory.SetCurrentDirectory(filepath);
+            WebClient myWebClient = new WebClient();
+            myStringWebResource = mineshafter;
+            myWebClient.DownloadFile(myStringWebResource, fileName);
+            System.Diagnostics.Process clientProcess = new Process();
+            clientProcess.StartInfo.RedirectStandardOutput = true;
+            clientProcess.StartInfo.UseShellExecute = false;
+            clientProcess.StartInfo.CreateNoWindow = true;
+            clientProcess.StartInfo.FileName = "java";
+            clientProcess.StartInfo.Arguments = @"-jar " + (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\mineshaftersquared.jar");
+            clientProcess.Start();
+            textBox4.Text = "Mineshafter Squared has been launched!";
+            textBox4.Visible = true;
+            timer5.Enabled = true;
+
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void bgWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Process[] runingProcess = Process.GetProcesses();
+            for (int i = 0; i < runingProcess.Length; i++)
+            {
+                // compare equivalent process by their name
+                if (runingProcess[i].ProcessName == "java.exe")
+                {
+                    // kill  running process
+                    runingProcess[i].Kill();
+                }
+                string downgrade = new WebClient().DownloadString("http://spgrn.com/updater/download.txt");
+                string fileName = "minecraft.jar", myStringWebResource = null;
+                string filepath = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.minecraft" + "\\bin\\");
+                Directory.SetCurrentDirectory(filepath);
+                WebClient myWebClient = new WebClient();
+                myStringWebResource = downgrade;
+                myWebClient.DownloadFile(myStringWebResource, fileName);
+                backgroundWorker1.CancelAsync();
+            }
+        }
+
+        private void bgWorker1_ProgessChanges(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void bgWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            string path = (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.minecraft" + "\\bin\\minecraft.jar");
+            if (File.Exists(path))
+            {
+                textBox3.Text = "Downgrade success. (Please wait at least 5 seconds before exiting)";
+                textBox3.Visible = true;
+                timer4.Enabled = true;
+                timer3.Enabled = false;
+            }
+            else
+            {
+                textBox3.Text = "Downgrade in progress.";
+                textBox3.Visible = true;
+                timer4.Enabled = true;
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer4_Tick(object sender, EventArgs e)
+        {
+            textBox3.Visible = false;
+            timer4.Enabled = false;
+        }
+
+        private void timer5_Tick(object sender, EventArgs e)
+        {
+            textBox4.Visible = false;
+            timer5.Enabled = false;
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            updater1.CheckForUpdates();
+        }
+
+        private void version1001ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("You are currently running on version 1.0.0.7.\n Click the \"OK\" button to check for updates.", "About", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            updater1.CheckForUpdates();
+        }
+
+        private void checkForUpdatesOnStartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (checkForUpdatesOnStartToolStripMenuItem.Checked == false)
+            {
+                checkForUpdatesOnStartToolStripMenuItem.Checked = false;
+                Properties.Settings.Default.updateonrun = false;
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                checkForUpdatesOnStartToolStripMenuItem.Checked = true;
+                Properties.Settings.Default.updateonrun = true;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void defaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (defaultToolStripMenuItem.Checked == true)
+            {
+                pictureBox1.Image = Image.FromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\Themes\\default.gif");
+                unanimatedToolStripMenuItem.Checked = false;
+                oldDefaultToolStripMenuItem.Checked = false;
+                defaultToolStripMenuItem.Checked = true;
+                Properties.Settings.Default.Theme = "Default";
+                Properties.Settings.Default.Save();
+            }
+            if (defaultToolStripMenuItem.Checked == false)
+            {
+                pictureBox1.Image = Image.FromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\Themes\\default.gif");
+                unanimatedToolStripMenuItem.Checked = false;
+                oldDefaultToolStripMenuItem.Checked = false;
+                defaultToolStripMenuItem.Checked = true;
+                Properties.Settings.Default.Theme = "Default";
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void unanimatedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (unanimatedToolStripMenuItem.Checked == false)
+            {
+                pictureBox1.Image = Image.FromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\Themes\\unanimated.jpg");
+                unanimatedToolStripMenuItem.Checked = true;
+                oldDefaultToolStripMenuItem.Checked = false;
+                defaultToolStripMenuItem.Checked = false;
+                Properties.Settings.Default.Theme = "Unanimated";
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void oldDefaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (defaultToolStripMenuItem.Checked == false)
+            {
+                pictureBox1.Image = Image.FromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\Themes\\olddefault.jpg");
+                oldDefaultToolStripMenuItem.Checked = true;
+                unanimatedToolStripMenuItem.Checked = false;
+                defaultToolStripMenuItem.Checked = false;
+                Properties.Settings.Default.Theme = "OldDefault";
+                Properties.Settings.Default.Save();
+            }
+            if (defaultToolStripMenuItem.Checked == true)
+            {
+                pictureBox1.Image = Image.FromFile(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\Themes\\olddefault.jpg");
+                oldDefaultToolStripMenuItem.Checked = true;
+                unanimatedToolStripMenuItem.Checked = false;
+                defaultToolStripMenuItem.Checked = false;
+                Properties.Settings.Default.Theme = "OldDefault";
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void openThemesDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.MCUHelper\\Themes");
+        }
+    }
+}

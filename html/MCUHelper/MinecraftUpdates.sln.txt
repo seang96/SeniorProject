@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinecraftUpdates", "MinecraftUpdates\MinecraftUpdates.csproj", "{7009FC0A-5928-42A0-8B51-E585902152E9}"
+EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Installer", "Installer\Installer.isproj", "{462BF6B9-0BDC-4C62-90CF-D45303DF2FEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Any CPU = CD_ROM|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		DVD-5|Any CPU = DVD-5|Any CPU
+		Release|Any CPU = Release|Any CPU
+		SingleImage|Any CPU = SingleImage|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7009FC0A-5928-42A0-8B51-E585902152E9}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{7009FC0A-5928-42A0-8B51-E585902152E9}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{7009FC0A-5928-42A0-8B51-E585902152E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7009FC0A-5928-42A0-8B51-E585902152E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7009FC0A-5928-42A0-8B51-E585902152E9}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{7009FC0A-5928-42A0-8B51-E585902152E9}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{7009FC0A-5928-42A0-8B51-E585902152E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7009FC0A-5928-42A0-8B51-E585902152E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7009FC0A-5928-42A0-8B51-E585902152E9}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{7009FC0A-5928-42A0-8B51-E585902152E9}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{462BF6B9-0BDC-4C62-90CF-D45303DF2FEA}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
+		{462BF6B9-0BDC-4C62-90CF-D45303DF2FEA}.CD_ROM|Any CPU.Build.0 = CD_ROM
+		{462BF6B9-0BDC-4C62-90CF-D45303DF2FEA}.Debug|Any CPU.ActiveCfg = SingleImage
+		{462BF6B9-0BDC-4C62-90CF-D45303DF2FEA}.Debug|Any CPU.Build.0 = SingleImage
+		{462BF6B9-0BDC-4C62-90CF-D45303DF2FEA}.DVD-5|Any CPU.ActiveCfg = DVD-5
+		{462BF6B9-0BDC-4C62-90CF-D45303DF2FEA}.DVD-5|Any CPU.Build.0 = DVD-5
+		{462BF6B9-0BDC-4C62-90CF-D45303DF2FEA}.Release|Any CPU.ActiveCfg = SingleImage
+		{462BF6B9-0BDC-4C62-90CF-D45303DF2FEA}.Release|Any CPU.Build.0 = SingleImage
+		{462BF6B9-0BDC-4C62-90CF-D45303DF2FEA}.SingleImage|Any CPU.ActiveCfg = SingleImage
+		{462BF6B9-0BDC-4C62-90CF-D45303DF2FEA}.SingleImage|Any CPU.Build.0 = SingleImage
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

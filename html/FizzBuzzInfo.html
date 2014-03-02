@@ -1,0 +1,3544 @@
+<html><head><title>Fizz Buzz Test</title>
+
+<style type="text/css"></style><style>#ojzotynfhsykxrbaujxntxjemiuxszflxr{border:solid 2px #fff !important;box-sizing:content-box !important;color:#fff !important;display:block !important;height:auto !important;margin:0 !important;opacity:0.9 !important;padding:7px 10px !important;position:fixed !important;visibility:visible !important;width:auto !important;z-index:2147483647 !important;-webkit-border-radius:5px !important;-webkit-box-shadow:0px 0px 20px #000 !important;-webkit-box-sizing:content-box !important;}.ojzotynfhsykxrbaujxntxjemiuxszflxr-blocked{color:#777 !important;display:inline !important;text-decoration:line-through !important;}#ojzotynfhsykxrbaujxntxjemiuxszflxr br{display:block !important;}#ojzotynfhsykxrbaujxntxjemiuxszflxr span{background:transparent !important;}#ojzotynfhsykxrbaujxntxjemiuxszflxr div{border:0 !important;margin:0 !important;padding:0 !important;width:auto !important;letter-spacing:normal !important;font:13px Arial,Helvetica !important;text-align:left !important;text-shadow:none !important;text-transform:none !important;word-spacing:normal !important;}#ojzotynfhsykxrbaujxntxjemiuxszflxr a{font-weight:normal !important;background:none !important;text-decoration:underline !important;color:#fff !important;}@media print{#ojzotynfhsykxrbaujxntxjemiuxszflxr{display:none !important;}}</style></head>
+<body text="black" bgcolor="white"><h1><img src="qrc:/html/html/wiki.gif">
+<a href="fullSearch" rel="nofollow">Fizz Buzz Test</a></h1>
+<div id="wiki">
+The "Fizz-Buzz test" is an interview question designed to help filter out the 99.5% of programming job candidates who can't seem to program their way out of a wet paper bag.
+The text of the programming assignment is as follows:
+<dl>
+<dt> </dt><dd><em>"Write a program that prints the numbers from 1 to 100. But for multiples of three print “Fizz” instead of the number and for the multiples of five print “Buzz”. For numbers which are multiples of both three and five print “F<strong></strong>izzBuzz”."</em>
+<p></p>
+</dd></dl>
+Source: "Using <a href="wiki?FizzBuzz">FizzBuzz</a> to Find Developers who Grok Coding"
+<a href="http://tickletux.wordpress.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/" rel="nofollow">http://tickletux.wordpress.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/</a>
+<p></p>
+<em>It would be more interesting if the numbers were -50 to +50. -- mt</em>
+<hr>
+<p></p>
+Articles:
+<ul>
+<li> "Why Can't Programmers.. Program?" -- <a href="http://www.codinghorror.com/blog/archives/000781.html" rel="nofollow">http://www.codinghorror.com/blog/archives/000781.html</a>
+</li><li> <a href="http://peripateticaxiom.blogspot.co.uk/2007/02/fizzbuzz.html" rel="nofollow">http://peripateticaxiom.blogspot.co.uk/2007/02/fizzbuzz.html</a>
+</li><li> <a href="http://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/" rel="nofollow">http://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/</a>
+</li><li> <a href="wiki?FizzBuzzInManyProgrammingLanguages">FizzBuzzInManyProgrammingLanguages</a>
+<p></p>
+</li></ul>
+<hr>
+<p></p>
+<strong>Why Fizz-Buzz is "hard:"</strong>
+<p></p>
+We can't understand why so many people "fail" the Fizz-Buzz test unless we understand why it is "hard" (for them).
+Understanding that, we may be able to evaluate the usefulness of this tool, and others, as filtering tools for candidates.
+<p></p>
+I think Fizz-Buzz is "hard" for some programmers because
+(#1) it doesn't fit into any of the patterns that were given to them in school assignments,
+and
+(#2) it isn't possible to directly and simply represent the necessary tests, without duplication, in just about any commonly-used modern programming language.
+<p></p>
+On #1, that it doesn't match the patterns they memorized from lectures and class assignments:
+I think this makes it a good discriminator, because I wish to hire candidates who can think for themselves -- not those who are limited to copying solutions from others.
+<p></p>
+On #2, that it's hard to directly code it:
+Fizz-Buzz does <strong>not</strong> fall into the common pattern of
+<pre>  if 1 then A
+  else if 2 then B
+  else if 3 then C
+  else/otherwise D
+</pre>
+(Well it does, but not when you consider "1,2 &amp; 3" to be atomic tests, like "is divisible by 3.")
+<p></p>
+Consider...
+<pre>	if (theNumber is divisible by 3) then
+	print "Fizz"
+	else if (theNumber is divisible by 5) then
+	print "Buzz"
+	else /* theNumber is not divisible by 3 or 5 */
+	print theNumber
+	end if
+</pre>
+Now where do you put "<a href="wiki?FizzBuzz">FizzBuzz</a>" in this structure?
+<p></p>
+Like this...?
+<pre>	if (theNumber is divisible by 3) then	---&gt;
+	if (theNumber is divisible by 5) then
+	 print "Fizz<em></em>Buzz"
+	else			  &lt;---
+	 print "Fizz"
+	else if (theNumber is divisible by 5) then
+	print "Buzz"
+	else /* theNumber is not divisible by 3 or 5 */
+	print theNumber
+	end if
+</pre>
+[ick!!!]
+(The structure of the if statements is icky, and there are two tests for the same condition -- (theNumber is divisible by 5).)
+<p></p>
+Doing a "3 and 5" test makes the code more readable -- with more duplication:
+<pre>	if (theNumber is divisible by 3) and (theNumber is divisible by 5) then
+	print "Fizz<em></em>Buzz"
+	else if (theNumber is divisible by 3) then
+	print "Fizz"
+	else if (theNumber is divisible by 5) then
+	print "Buzz"
+	else /* theNumber is not divisible by 3 or 5 */
+	print theNumber
+	end if
+</pre>
+Maybe there's no simple and satisfying solution to the code structuring issue.
+(...except in COBOL-85, which would be ironic. ;-)
+-- <a href="wiki?JeffGrigg">JeffGrigg</a>
+<p></p>
+<ul>
+<li> <em>What feature of COBOL-85 supports this?</em>
+<p></p>
+</li></ul>
+<em>There's a very satisfactory solution to the code structuring issue, as demonstrated by the following VBA:</em>
+<p></p>
+<pre> Public Sub fizzbuzz()
+	For n = 1 To 100
+	Select Case 0
+		Case n Mod 15
+		f = "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+		Case n Mod 3
+		f = "Fizz"
+		Case n Mod 5
+		f = "Buzz"
+		Case Else
+		f = n
+	End Select
+	Debug.Print f
+	Next n
+ End Sub
+</pre>
+-- <a href="wiki?MarcThibault">MarcThibault</a>
+<hr>
+<p></p>
+<hr>
+This (deliberately) inelegant looking php code will do the job without any modulus or if...then (other than what's implicit in a for loop) calls. The focus is on the algorithm, so it's language agnostic (hence the avoidance of simpler and more elegant php constructs - might as well have written it in pseudo-code). I am putting it out here since I haven't seen any example that avoids both if and modulus.
+<p></p>
+&lt;?php
+<p></p>
+// Declared in ascending order, or sort ascending before using
+<p></p>
+$step[0] = 3;
+<p></p>
+$step[1] = 5;
+<p></p>
+$step[2] = 15;
+<p></p>
+// Now get to work. Build the 1 to 100 array
+<p></p>
+for ($i = 1; $i&lt;=100; $i++) {
+<pre>	$theList[$i] = $i;
+</pre>
+}
+<p></p>
+// Mark the "Fizz"es
+<p></p>
+for ($i = $step[0]; $i &lt;= 100; $i = $i + $step[0]) {
+<p></p>
+<pre>	$theList[$i] = "Fizz";
+<p></p>
+</pre>
+}
+<p></p>
+// Mark the "Buzz"es
+<p></p>
+for ($i = $step[1]; $i &lt;= 100; $i = $i + $step[1]) {
+<p></p>
+<pre>	$theList[$i] = "Buzz";
+<p></p>
+</pre>
+}
+<p></p>
+// Mark the "<a href="wiki?FizzBuzz">FizzBuzz</a>"es
+<p></p>
+for ($i = $step[2]; $i &lt;= 100; $i = $i + $step[2]) {
+<p></p>
+<pre>	$theList[$i] = "<a href="wiki?FizzBuzz">FizzBuzz</a>";
+<p></p>
+</pre>
+}
+<p></p>
+var_dump($theList);
+<p></p>
+?&gt;
+<p></p>
+--- Syed Hasan
+<hr>
+<p></p>
+Yes, the observation that a number divisible by 3 and 5 is also divisible by 3 * 5 is the key to a neat <a href="wiki?FizzBuzz">FizzBuzz</a> solution. - twf
+<p></p>
+<em>When I see a solution with x % 15, I am inclined to declare it to be obfuscated duplication, and refactor it back into !(x % 3) &amp;&amp; !(x % 5) so that the duplication is more obvious (and the program reads closer to the spec.)</em>
+<p></p>
+<em>I'm also inclined to <a href="wiki?ReplaceTempWithQuery">ReplaceTempWithQuery</a> every time I see code that creates a temp var referred to twice (inventing a name and saying it three times!) rather than saying (x % 5) twice.</em>
+<p></p>
+<hr>
+<p></p>
+In response to <a href="wiki?MarcThibault">MarcThibault</a> question: What feature of COBOL-85 supports this?
+<p></p>
+It is probably the EVALUATE statement. 
+<p></p>
+The modulus operator used in
+several solutions given here may not be the first thing that comes to the mind
+of a COBOL programmer (possibly a case of having ones problem solving techniques
+framed by the language used). A COBOL programmer
+may come to the conclusion that counters are all that is required.
+When a counter gets to the desired number then you have reached a multiple
+of that number. Do whatever you have to do and reset the counter.
+<p></p>
+Here is a COBOL solution to FIZZBUZZ using counters...
+<p></p>
+<pre>	IDENTIFICATION DIVISION.
+	PROGRAM-ID. FIZZBUZZ.
+<p></p>
+	DATA DIVISION.
+	WORKING-STORAGE SECTION.
+</pre><ol>
+<li>  FIZZ-CNT PIC S9(4) BINARY.
+</li><li>  BUZZ-CNT PIC S9(4) BINARY.
+</li><li>  I	PIC S9(4) BINARY.
+<p></p>
+</li></ol><pre>	PROCEDURE DIVISION.
+		MOVE ZERO TO FIZZ-CNT
+		MOVE ZERO TO BUZZ-CNT
+		PERFORM VARYING I FROM 1 BY 1
+			UNTIL I &gt; 100
+		COMPUTE FIZZ-CNT = FIZZ-CNT + 1
+		COMPUTE BUZZ-CNT = BUZZ-CNT + 1
+		EVALUATE TRUE
+		 WHEN FIZZ-CNT = 3 AND BUZZ-CNT = 5
+			DISPLAY 'FIZZBUZZ'
+			MOVE ZERO TO FIZZ-CNT
+			MOVE ZERO TO BUZZ-CNT
+		 WHEN FIZZ-CNT = 3
+			DISPLAY 'FIZZ'
+			MOVE ZERO TO FIZZ-CNT
+		 WHEN BUZZ-CNT = 5
+			DISPLAY 'BUZZ'
+			MOVE ZERO TO BUZZ-CNT
+		 WHEN OTHER
+			DISPLAY I
+		END-EVALUATE
+		END-PERFORM
+		GOBACK
+		.
+<p></p>
+</pre>
+The REMAINDER from a DIVIDE statement could also
+have been used as in:
+<p></p>
+<pre>		DIVIDE I BY 3 GIVING I-DONT-CARE REMAINDER FIZZ-CNT
+		IF FIZZ-CNT = ZERO
+		DISPLAY 'FIZZ'
+		END-IF
+<p></p>
+</pre>
+The above is the type of coding that gives COBOL a reputation for being very long winded. It doesn't
+have to be that way ;-)
+<p></p>
+<hr>
+<a href="wiki?ForthLanguage">ForthLanguage</a> can do it easily.
+<p></p>
+<pre> : fizz  ( n -- ? )  3 MOD  IF FALSE EXIT THEN  TRUE  ." Fizz" ;
+ : buzz  ( n -- ? )  5 MOD  IF FALSE EXIT THEN  TRUE  ." Buzz" ;
+ : bazz  ( n ? -- )  IF DROP EXIT THEN	.  ;
+ : fizzBuzz  ( n -- )  CR  DUP  fizz	OVER  buzz	OR bazz ;
+ : fizzBuzzes	( n -- )  1+ 1 DO  I fizzBuzz  LOOP ;
+<p></p>
+ \ Tests fizzBuzz
+ 100 fizzBuzzes
+<p></p>
+</pre>
+You don't need a special case to print <a href="wiki?FizzBuzz">FizzBuzz</a>. A number that divides by both three and five should already cause both Fizz and Buzz to print one after the other. Just don't use else. -- Michael Morris
+<p></p>
+<p></p>
+An alternative Forth solution which lets you define fizzbuzz-style at a higher level:
+<p></p>
+<pre> \ addr is the data address of a noise word we want to output
+ : make-noise ( addr -- )
+	cell+ count type
+ ;
+<p></p>
+ \ allocate space for and and store a counted string
+ : $store ( addr len -- )
+	dup ,
+	tuck here swap move allot
+ ;
+<p></p>
+ \ define a word that makes a noise when passed a number
+ \ which is divisible by its own parameter n
+ : mod/noise ( n caddr len &lt;name&gt; -- )
+	create
+	rot , $store
+ does&gt; ( n data* -- flag)  \ make a noise or not, indicate our decision with a flag
+	&gt;r
+	r@ @ mod 0= dup if r@ make-noise then r&gt; drop
+ ;
+<p></p>
+ \ define fizz and buzz in terms of their modulo number and message string
+ 3 s" Fizz" mod/noise fizz?
+ 5 s" Buzz" mod/noise buzz?
+<p></p>
+ \ Now use them in our main word
+ : fizzbuzz ( n)
+	dup fizz? over buzz? or if space drop else . then
+ ;
+<p></p>
+ \ And call it in a loop
+ : fizzbuzzes 1+ 1 do i fizzbuzz loop ;
+<p></p>
+ 100 fizzbuzzes
+<p></p>
+</pre>
+<hr>
+<p></p>
+Here is one way to do the testing - this is working in <a href="wiki?CeePlusPlus">CeePlusPlus</a>. -- <a href="wiki?JohnFletcher">JohnFletcher</a>
+<p></p>
+<pre> void test(int n)
+ {
+  bool is_fizz = test_fizz(n);
+  bool is_buzz = test_buzz(n);
+  if (is_fizz || is_buzz) {
+	if (is_fizz) output_fizz();
+	if (is_buzz) output_buzz();
+  } else {
+	output_number(n);
+  }
+  output_end_of_line();
+ }
+</pre>
+You almost have it. If you're putting both the tests and the printing into separate functions anyway, then you can perform the tests and the printing in the same function. Like so.
+<p></p>
+<pre> void test(int n) {
+	bool printed = fizz(n);
+	printed |= buzz(n);
+	if(!printed) { output_number(n); }
+	output_end_of_line();
+ }
+<p></p>
+</pre>
+What about good old C? -- Lemen
+<p></p>
+int main()	{
+<p></p>
+<pre>	for( int i=1; i&lt;=100; i++)
+	{
+		if(i%3==0)
+		  printf("Fizz");
+		if(i%5==0)
+		  printf("Buzz");
+		if(i%3!=0 &amp;&amp; i%5!=0)
+		  printf("%d",i);
+<p></p>
+		printf("\n");
+	}
+<p></p>
+	return 0;
+</pre>
+}
+<p></p>
+But where's "<a href="wiki?FizzBuzz">FizzBuzz</a>" case in the code above?  <em>Notice that there's no newline except in the fourth printf.  If a number is a multiple of 15, the first two if-clauses are both true, so both cases run.</em>
+<p></p>
+or a more obtuse solution:
+<p></p>
+<pre>	int main (int argc, const char * argv[])
+	{
+	char *formats[] = { "%d\n", "fizz\n", "buzz\n", "fizzbuzz\n" };
+<p></p>
+	for (int i = 1; i &lt;= 100; i++)
+		printf(formats[(i % 3 == 0) + 2 * (i % 5 == 0)], i);
+<p></p>
+	return 0;
+	}
+<p></p>
+</pre>
+or not such readable but a little bit faster ;o) :
+<p></p>
+<pre>  #include &lt;stdio.h&gt;
+  const char* fmt_str[15] = {"<a href="wiki?FizzBuzz">FizzBuzz</a>\n", "%d\n", "%d\n",  "Fizz\n", 
+				"%d\n", "Buzz\n", "Fizz\n" "%d\n", "%d\n", 
+				"Fizz\n", "Buzz\n", "%d\n", "Fizz\n",
+				"%d\n", "%d\n"};
+  int main(int argc, char* argv[]) {
+	for(int i=1;i&lt;=100;i++)
+	printf(fmt_str[i%15], i);
+	return 0;
+  }
+<p></p>
+</pre>
+Above C code: no, no, naughty programmer, you can't leave an undigested argument on the printf, that will crash on some platforms.
+<p></p>
+<em>If it crashes, the platform cannot be trusted to get anything right, because this is valid C: "If the format is exhausted while arguments remain, the excess arguments are evaluated (as always) but are otherwise ignored."  Identical text in C89 and C99.</em>
+<p></p>
+Or Java with a different approach:
+<p></p>
+class <a href="wiki?FizzBuzz">FizzBuzz</a>	{
+<p></p>
+<pre>	public static void main(String[] args)
+	{
+<p></p>
+		for(int i=1; i&lt;=100; i++)
+		{
+			String num="";
+<p></p>
+			if(i%3==0)
+			  num+="Fizz";
+			if(i%5==0)
+			  num+="Buzz";
+			if(num.length()==0)
+			  num=Integer.toString(i);
+<p></p>
+			System.out.println(num);
+		}
+	}
+</pre>
+}
+<p></p>
+<p></p>
+<p></p>
+<em>Sometimes you just need <a href="wiki?PerlLanguage">PerlLanguage</a>. -- <a href="wiki?EarleMartin">EarleMartin</a></em>
+<p></p>
+<pre> #!/usr/bin/perl
+<p></p>
+ for (1..100) {
+	my $fizz = ($_ % 3 == 0) ? "Fizz" : "";
+	my $buzz = ($_ % 5 == 0) ? "Buzz" : "";
+	($fizz ne "" || $buzz ne "") ? print "$fizz$buzz\n" : print "$_\n";
+ }
+<p></p>
+</pre>
+<em>Or, as a one-liner:</em>
+<p></p>
+<pre> #!/usr/bin/perl
+ print ( ((($_ % 3) ? "" : "Fizz") . (($_ % 5) ? "" : "Buzz")) || $_, "\n") for (1..100);
+<p></p>
+</pre>
+or
+<p></p>
+<pre>  #!/usr/bin/perl
+  @v=(0, "Fizz", "Buzz", "<a href="wiki?FizzBuzz">FizzBuzz</a>");
+  for($v[0]=1;$v[0]&lt;=100;$v[0]++){
+	$k = ($v[0]%3)?0:1;
+	$k += ($v[0]%5)?0:2;
+	print($v[$k]."\n");
+  }
+<p></p>
+</pre>
+Slightly less elegant perl:
+<p></p>
+@fizz=('Fizz',undef,undef) x 34;
+<p></p>
+@buzz=('Buzz',undef,undef,undef,undef) x 21;
+<p></p>
+map { print $fizz[$_].$buzz[$_] . 
+<pre>      (($fizz[$_].$buzz[$_]) ? '' : $_) .
+      "\n"; } (1..100)
+<p></p>
+</pre>
+-- ZakMcGregor<a href="wiki?edit=ZakMcGregor" rel="nofollow">?</a>, 2014.01.31
+<p></p>
+<p></p>
+No love for brainfuck?
+<p></p>
+<pre> &gt;++++++++++[&lt;++++++++++&gt;-]&lt;[&gt;+&gt;[-]&gt;++++++++++[&lt;++++++++++&gt;-]&lt;+&lt;&lt;[-&gt;&gt;-&gt;+&lt;&lt;&lt;]&gt;&gt;&gt;
+ [-&lt;&lt;&lt;+&gt;&gt;&gt;]&lt;&gt;&gt;+++&lt;&lt;[-&gt;+&gt;-[&gt;+&gt;&gt;]&gt;[+[-&lt;+&gt;]&gt;+&gt;&gt;]&lt;&lt;&lt;&lt;&lt;&lt;]&gt;[-&lt;+&gt;]+&gt;[-]&gt;[&lt;&lt;-&gt;&gt;[-]]&gt;[-]
+ &lt;&lt;&lt;[[-]++++++++++[&gt;++++++++++&lt;-]&gt;++.+++.[-]&lt;[-]+++++++++++[&gt;+++++++++++&lt;-]&gt;+..
+ [-]&lt;[-]&lt;&lt;[-]&gt;&gt;]&lt;&gt;&gt;+++++&lt;&lt;[-&gt;+&gt;-[&gt;+&gt;&gt;]&gt;[+[-&lt;+&gt;]&gt;+&gt;&gt;]&lt;&lt;&lt;&lt;&lt;&lt;]&gt;[-&lt;+&gt;]+&gt;[-]&gt;[&lt;&lt;-&gt;&gt;[
+ -]]&gt;[-]&lt;&lt;&lt;[[-]+++++++++[&gt;+++++++++++&lt;-]&gt;-.[-]&lt;[-]+++++++++[&gt;+++++++++++++&lt;-]&gt;.
+ +++++..[-]&lt;[-]&lt;&lt;[-]&gt;&gt;]&lt;&lt;[[-]&gt;&gt;++++++++++&lt;[-&gt;-[&gt;+&gt;&gt;]&gt;[+[-&lt;+&gt;]&gt;+&gt;&gt;]&lt;&lt;&lt;&lt;&lt;]&gt;[-]&gt;&gt;[
+ &gt;++++++++[&lt;++++++&gt;-]&lt;.[-]]&lt;&gt;++++++++[&lt;++++++&gt;-]&lt;.[-]&lt;&lt;&lt;]&gt;[-]++++++++++.[-]&lt;[-]
+ &lt;-]
+<p></p>
+</pre>
+<em>Python:</em>
+<p></p>
+<pre>	import sys
+	for i in range(-50, 100):
+	if i%3==0:
+		sys.stdout.write('Fizz')
+	if i%5==0:
+		sys.stdout.write('Buzz')
+	if (i%5&lt;&gt;0 and i%3&lt;&gt;0):
+		print i,
+	print
+</pre>
+<hr>
+<strong>Python:</strong>
+<p></p>
+<pre>	#!/usr/bin/env python
+<p></p>
+	for x in range(1,101):
+		s = ""
+		if x % 3 == 0:
+			s += "Fizz"
+		if x % 5 == 0:
+			s += "Buzz"
+		if s == "":
+			s = x
+		print s
+<p></p>
+</pre>
+Yasyf M.
+<hr>
+I JUST started programming 2 or 3 weeks ago, and I came up with this totally independently, so you can imagine my surprise at not seeing such an easy solution:
+<p></p>
+<pre>	for i in range(0,101):
+	if i % 3 == 0 and not i % 5 == 0:
+		print "fizz: %d" % i
+	elif i % 5 == 0 and not i % 3 == 0:
+		print "buzz: %d" % i
+	elif i % 3 == 0 and i % 5 == 0:
+		print "FIZZBUZZ: %d" % i
+	else:
+		print i
+<p></p>
+</pre>
+_Jonny Evans Feb_2013
+<hr>
+As I remember it from my childhood, the way we played this, <em>fizz</em> was not only for numbers divisible by three, but also numbers containing a three. And <em>buzz</em> similarly for five. The really adventurous did something similar for seven as well. -- <a href="wiki?JohnFletcher">JohnFletcher</a>
+<p></p>
+I ran across some mention of this. (You are not alone! ;-)
+<a href="http://paddy3118.blogspot.com/2007/03/fizz-buzzpy.html" rel="nofollow">http://paddy3118.blogspot.com/2007/03/fizz-buzzpy.html</a>
+-- <a href="wiki?JeffGrigg">JeffGrigg</a>
+<p></p>
+<hr>
+<p></p>
+You haven't played <a href="wiki?FizzBuzz">FizzBuzz</a> until you've played it at a (<a href="wiki?UnitedStates">UnitedStates</a>) state math meet. Starting rules combine the rules above and <a href="wiki?JohnFletcher">JohnFletcher</a>'s rules (a "fizz" for a multiple of three <em>or</em> one "fizz" per '3' digit). More elaborate rules are added as the game progresses: squares, primes, etc. Trying counting on the fly how many ways 211 is the sum of two squares, <em>and</em> determining whether it's prime, etc!
+<p></p>
+Yeah and for fizz the direction changes and for buzz the next person is skipped for both the combination is then reverse and skip of course and that at the speed of speaking preferably.
+<p></p>
+<em>I take it this is no longer a programming exercise, but a <a href="wiki?DrinkingGame">DrinkingGame</a>?</em>
+<hr>
+Three PHP ways - 
+<p></p>
+1)----------------------
+<p></p>
+function <a href="wiki?FizzBuzz">FizzBuzz</a> ($input_range, $output_vars){	
+<pre>	for($i = $input_range['Start']; $i &lt;= $input_range['End']; $i++){
+		if($i == 0){ continue; }
+		$testing = '';
+		foreach ($output_vars as $key =&gt; $value){
+			if ($i % $key == 0) {$testing .= $value;}
+		}
+		$output .= ','. $i . ',' .$testing. '&lt;br&gt;';
+	}
+	return $output;
+</pre>
+}
+$output_vars = array (3 =&gt; "Fizz", 5 =&gt; "Buzz", 15 =&gt; "<a href="wiki?FizzBuzz">FizzBuzz</a>");
+$input_range = array ("Start" =&gt; -60 , "End" =&gt; 100);
+echo <a href="wiki?FizzBuzz">FizzBuzz</a>($input_range, $output_vars);
+<p></p>
+2)----------------------
+<p></p>
+$out = '';
+for ( $i=1; $i &lt;= 100; ++$i ) {
+<pre>	if ($f = ($i%3 == 0)) $out .= 'Fizz';
+	if ($b = ($i%5 == 0)) $out .= 'Buzz';
+	if ($f == 0 &amp;&amp; $b == 0) $out .= $i;
+	$out .= ', ';
+</pre>
+}
+echo $out;
+<p></p>
+3)----------------------
+<p></p>
+$out = '';
+for ( $i=1; $i &lt;= $N; ++$i ) {
+<pre>	$outp = '';
+	if ($i%3 == 0) $outp = 'Fizz';
+	if ($i%5 == 0) $outp .= 'Buzz';
+	if ($outp == '') $outp = $i;
+	$out .= $outp.', ';
+</pre>
+}
+echo $out;
+<p></p>
+-- <a href="wiki?ZoharBabin">ZoharBabin</a>
+<hr>
+Groovy, in 67 Characters:
+<p></p>
+for(i in 1..100)println(i%3+i%5?i%3?i%5?i:"Buzz":"Fizz":"<a href="wiki?FizzBuzz">FizzBuzz</a>")
+<p></p>
+-- Roridge
+<p></p>
+Here's Groovy in 61 characters:
+<p></p>
+(1..100).each{println((it%3?"":"Fizz")+(it%5?"":"Buzz")?:it)}
+<p></p>
+<hr>
+Just BASIC:
+<pre> P = 0
+ for N = 1 to 100
+ if N mod 3 = 0 then print "Fizz"; : P = 1
+ if N mod 5 = 0 then print "Buzz"; : P = 1
+ if P &gt; 0 then P = 0 : print else print N
+ next N
+</pre>
+-- Lee
+<p></p>
+<hr>
+<a href="wiki?JavaScript">JavaScript</a>
+<p></p>
+var i = 1,
+<pre>	f = 'Fizz',
+	b = 'Buzz',
+	out = '';
+</pre>
+for (; i &lt;= 100; i++) {
+<pre>	out = !(i % 3) ?  !(i % 5)? f+b : f : !(i % 5)? b : i;
+	console.log(out);
+</pre>
+}
+-- Jin
+<p></p>
+//Or just this maintenance nightmare
+---
+for(i=1;i&lt;=100;i++) console.log(((i%3)?(i%5)?i:'Buzz':(i%5)?'Fizz':'<a href="wiki?FizzBuzz">FizzBuzz</a>'));
+--Kier
+<p></p>
+<hr>
+<a href="wiki?CoffeeScript">CoffeeScript</a>
+<pre>  k = (n, a, b) -&gt; if n % b then a else a+this[b]
+  fizzbuzz = (n, factors) -&gt; (Object.keys(factors).reduce(k.bind(factors,i),'') or i for i in [1..n])
+  fizzbuzz(100, {3:'fizz',5:'buzz'})
+<p></p>
+</pre>
+<a href="wiki?CoffeeScript">CoffeeScript</a>
+<p></p>
+We begin by defining the zz method that conditionally adds word-zz to an array ...
+<p></p>
+<pre>  Array.prototype.zz = (word, bool) -&gt; this.push "#{word}zz" unless bool; this
+  console.log([].zz('fi',i%3).zz('bu',i%5).join(' ') or i) for i in [1..100]
+<p></p>
+</pre>
+<hr>
+<a href="wiki?CoffeeScript">CoffeeScript</a>
+<p></p>
+["fizz" unless i%3]+["buzz" unless i%5] or i for i in [1..100]
+<p></p>
+<p></p>
+<hr>
+Io
+<p></p>
+<pre>  Range;1 to(100) foreach(x,if(x%15==0,writeln("<a href="wiki?FizzBuzz">FizzBuzz</a>"),if(x%3==0,writeln("Fizz"),if(x%5==0,writeln("Buzz"),writeln(x)))))
+<p></p>
+</pre>
+-- Jake
+<hr>
+Sh
+<p></p>
+seq 1 100 | while read L; do
+<p></p>
+<pre>	F=$(($L % 3))
+	B=$(($L % 5))
+<p></p>
+	[ $F -eq 0 ] &amp;&amp; echo -n Fizz
+	[ $B -eq 0 ] &amp;&amp; echo -n Buzz
+	[ $F -ne 0 ] &amp;&amp; [ $B -ne 0 ] &amp;&amp; echo -n $L
+<p></p>
+	echo
+</pre>
+done
+<hr>
+<a href="wiki?SetlLanguage">SetlLanguage</a>
+<p></p>
+<pre>  program fizzbuzz;
+<p></p>
+  (for m in [1..100], m3 in {m mod 3}, m5 in {m mod 5})
+	print(['',m](1+sign(m3*m5)) +/ {[0,'fizz']}{m3} +/ {[0,'buzz']}{m5});
+  end;
+<p></p>
+  end fizzbuzz;
+</pre>
+<hr>
+<p></p>
+<a href="wiki?PowerShell">PowerShell</a> 2.0
+<p></p>
+<pre> switch (1..100)
+	{
+	{-not ($_ % 15)} {'<a href="wiki?FizzBuzz">FizzBuzz</a>'; continue}
+	{-not ($_ % 5)}  {'Buzz'; continue}
+	{-not ($_ % 3)}  {'Fizz'; continue}
+	default	  {$_}
+	}
+<p></p>
+</pre>
+-DaveL
+<p></p>
+<hr>
+<p></p>
+The most concise <a href="wiki?PowerShell">PowerShell</a> solution I could come up with (83 characters):
+1..100|%{$o="";if($_%3-eq0){$o+="fizz"};if($_%5-eq0){$o+="buzz"};if(!$o){$o=$_};$o}
+<p></p>
+Rob Fulwell
+<p></p>
+<hr>
+<p></p>
+<strong><a href="wiki?PowerShell">PowerShell</a></strong> - <em>(Latest Microsoft Windows Operating System Language using Microsoft .NET Framework and created from and sharing similiarity to an amalgam of other languages such as ECMAScript, C, C++, Bash, Perl, etc.)</em>
+<p></p>
+<em>Note: Remove the hash "#" to uncomment the last "# $return" and have only the output itself.  Add a hash "#" to comment the preceding line "{0,3:G}..." to remove the nice advanced custom -f format operator output.</em>
+<p></p>
+The example below adds the optional "7" = "woof" variant to the code without increasing complexity.  The if statements are atomic and build up the $return variable so that further modulus checks can be added independently and easily.
+<p></p>
+The $return variable's name is non-specific to the language and was only used for the sake of legacy and historical association to the "return" keyword in many languages to output the data further out into the program.  So in other words, you can change the $return variable into anything you like to make the code shorter if you wish.
+<p></p>
+The complex looking line "{0,3:G}" -f "${_}" + ": $return" uses the <a href="wiki?PowerShell">PowerShell</a>'s -f format operator and .NET Framework's Format() methods on string tokens to select the first token "0", right-align it by 3-characters "3" and format the output using the "G" general format type for variables such as numbers and strings without adding group separators or decimal points.
+<p></p>
+<strong>Multiple "if" statements </strong>
+<p></p>
+<em>Code:</em>
+<p></p>
+<pre> 1 .. 100 |
+ % {
+	$return = ""
+<p></p>
+	if ( -not ( $_ % 3 ) ) { $return += "fizz" }
+	if ( -not ( $_ % 5 ) ) { $return += "buzz" }
+	if ( -not ( $_ % 7 ) ) { $return += "woof" }
+<p></p>
+	if ( $return -eq "" ) { $return = $_ }
+<p></p>
+	"{0,3:G}" -f "${_}" + ": $return"
+<p></p>
+	# $return
+ }
+<p></p>
+</pre>
+<strong>Single "if" Statement</strong>
+<p></p>
+<em>Code:</em>
+<pre> 1 .. 100 |
+ foreach {
+ 	$number = $_
+ 	$return = ""
+<p></p>
+ 	( 3, "fizz" ), ( 5, "buzz" ), ( 7, "woof" ) |
+ 	foreach {
+ 		if ( -not ( $number % $_[0] ) ) { $return += $_[1] }
+ 	}
+<p></p>
+ 	if ( $return -eq "" ) { $return = $number }
+<p></p>
+ 	"{0,3:G}" -f "${_}" + ": $return"
+<p></p>
+ 	# $return
+ }
+<p></p>
+</pre>
+<em>Output:</em>
+<p></p>
+<ol>
+<li>: 1
+</li><li>: 2
+</li><li>: fizz
+</li><li>: 4
+</li><li>: buzz
+</li><li>: fizz
+</li><li>: woof
+</li><li>: 8
+</li><li>: fizz
+</li></ol><pre>  10: buzz
+  11: 11
+  12: fizz
+  13: 13
+  14: woof
+  15: fizzbuzz
+  16: 16
+  17: 17
+  18: fizz
+  19: 19
+  20: buzz
+  21: fizzwoof
+  22: 22
+  23: 23
+  24: fizz
+  25: buzz
+  26: 26
+  27: fizz
+  28: woof
+  29: 29
+  30: fizzbuzz
+  31: 31
+  32: 32
+  33: fizz
+  34: 34
+  35: buzzwoof
+  36: fizz
+  37: 37
+  38: 38
+  39: fizz
+  40: buzz
+  41: 41
+  42: fizzwoof
+  43: 43
+  44: 44
+  45: fizzbuzz
+  46: 46
+  47: 47
+  48: fizz
+  49: woof
+  50: buzz
+  51: fizz
+  52: 52
+  53: 53
+  54: fizz
+  55: buzz
+  56: woof
+  57: fizz
+  58: 58
+  59: 59
+  60: fizzbuzz
+  61: 61
+  62: 62
+  63: fizzwoof
+  64: 64
+  65: buzz
+  66: fizz
+  67: 67
+  68: 68
+  69: fizz
+  70: buzzwoof
+  71: 71
+  72: fizz
+  73: 73
+  74: 74
+  75: fizzbuzz
+  76: 76
+  77: woof
+  78: fizz
+  79: 79
+  80: buzz
+  81: fizz
+  82: 82
+  83: 83
+  84: fizzwoof
+  85: buzz
+  86: 86
+  87: fizz
+  88: 88
+  89: 89
+  90: fizzbuzz
+  91: woof
+  92: 92
+  93: fizz
+  94: 94
+  95: buzz
+  96: fizz
+  97: 97
+  98: woof
+  99: fizz
+ 100: buzz
+<p></p>
+</pre>
+<strong>Alternate Rules: If number contains a matching digit also say the word.</strong>
+<p></p>
+<em>Code:</em>
+<pre> 1 .. 100 |
+ foreach {
+ 	$number = $_
+ 	$return = ""
+<p></p>
+ 	( 3, "fizz" ), ( 5, "buzz" ), ( 7, "woof" ) |
+ 	foreach {
+ 		$value = $_[0]
+ 		$word = $_[1]
+<p></p>
+ 		if ( -not ( $number % $value ) ) { $return += $word	}
+<p></p>
+ 		$number.ToString<a href="wiki?edit=ToString" rel="nofollow">?</a>().ToCharArray<a href="wiki?edit=ToCharArray" rel="nofollow">?</a>() |
+ 		foreach {
+ 			$char = $_
+<p></p>
+ 			if ( $char -eq $value.ToString<a href="wiki?edit=ToString" rel="nofollow">?</a>() ) { $return += $word }
+ 		}
+ 	}
+<p></p>
+ 	if ( $return -eq "" ) { $return = $number }
+<p></p>
+ 	"{0,3:G}" -f "${_}" + ": $return"
+<p></p>
+ 	#$return
+ }
+<p></p>
+</pre>
+<em>Output:</em>
+<ol>
+<li>: 1
+</li><li>: 2
+</li><li>: fizzfizz
+</li><li>: 4
+</li><li>: buzzbuzz
+</li><li>: fizz
+</li><li>: woofwoof
+</li><li>: 8
+</li><li>: fizz
+</li></ol><pre>  10: buzz
+  11: 11
+  12: fizz
+  13: fizz
+  14: woof
+  15: fizzbuzzbuzz
+  16: 16
+  17: woof
+  18: fizz
+  19: 19
+  20: buzz
+  21: fizzwoof
+  22: 22
+  23: fizz
+  24: fizz
+  25: buzzbuzz
+  26: 26
+  27: fizzwoof
+  28: woof
+  29: 29
+  30: fizzfizzbuzz
+  31: fizz
+  32: fizz
+  33: fizzfizzfizz
+  34: fizz
+  35: fizzbuzzbuzzwoof
+  36: fizzfizz
+  37: fizzwoof
+  38: fizz
+  39: fizzfizz
+  40: buzz
+  41: 41
+  42: fizzwoof
+  43: fizz
+  44: 44
+  45: fizzbuzzbuzz
+  46: 46
+  47: woof
+  48: fizz
+  49: woof
+  50: buzzbuzz
+  51: fizzbuzz
+  52: buzz
+  53: fizzbuzz
+  54: fizzbuzz
+  55: buzzbuzzbuzz
+  56: buzzwoof
+  57: fizzbuzzwoof
+  58: buzz
+  59: buzz
+  60: fizzbuzz
+  61: 61
+  62: 62
+  63: fizzfizzwoof
+  64: 64
+  65: buzzbuzz
+  66: fizz
+  67: woof
+  68: 68
+  69: fizz
+  70: buzzwoofwoof
+  71: woof
+  72: fizzwoof
+  73: fizzwoof
+  74: woof
+  75: fizzbuzzbuzzwoof
+  76: woof
+  77: woofwoofwoof
+  78: fizzwoof
+  79: woof
+  80: buzz
+  81: fizz
+  82: 82
+  83: fizz
+  84: fizzwoof
+  85: buzzbuzz
+  86: 86
+  87: fizzwoof
+  88: 88
+  89: 89
+  90: fizzbuzz
+  91: woof
+  92: 92
+  93: fizzfizz
+  94: 94
+  95: buzzbuzz
+  96: fizz
+  97: woof
+  98: woof
+  99: fizz
+ 100: buzz
+<p></p>
+<p></p>
+</pre>
+<hr>
+Java solution (without the main-method boilerplate):
+<p></p>
+<pre> public static void printFizzBuzz() {
+ 	for (int i=1; i &lt;= 100; i++) {
+ 		boolean fizz = (i % 3) == 0;
+ 		boolean buzz = (i % 5) == 0;
+<p></p>
+ 		if (fizz &amp;&amp; buzz) {
+ 			System.out.print("fizzbuzz");
+ 		} else if (fizz) {
+ 			System.out.print("fizz");
+ 		} else if (buzz) {
+ 			System.out.print("buzz");
+ 		} else {
+ 			System.out.print(i);
+ 		}
+<p></p>
+ 		if (i != 100) {
+ 			System.out.println();
+ 		}
+ 	}
+ }
+<p></p>
+<p></p>
+</pre>
+<hr>
+<p></p>
+Clojure
+<p></p>
+<pre> (doseq [x (map #(cond (zero? (mod % 15)) "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+			(zero? (mod % 3)) "Fizz"
+			(zero? (mod % 5)) "Buzz"
+			:else %)
+		(range 1 101))]
+	(println x))
+<p></p>
+</pre>
+<hr>
+<p></p>
+Ruby
+<p></p>
+<pre>  puts (1..100).map {|i|
+	f = i % 3 == 0 ? 'Fizz' : nil
+	b = i % 5 == 0 ? 'Buzz' : nil
+	f || b ? "#{ f }#{ b }" : i
+  }
+<p></p>
+</pre>
+- &lt;o&gt;s
+<p></p>
+C#
+<p></p>
+<pre> for (int i = 1; i &lt;= 100; i++)
+ {
+ 	if (i % 3 == 0 &amp;&amp; i % 5 == 0)
+ 	{
+ 		Console.WriteLine<a href="wiki?edit=WriteLine" rel="nofollow">?</a>("<a href="wiki?FizzBuzz">FizzBuzz</a>");
+ 		continue;
+ 	}
+ 	if (i % 3 == 0)
+ 	{
+ 		Console.WriteLine<a href="wiki?edit=WriteLine" rel="nofollow">?</a>("Fizz");
+ 		continue;
+ 	}
+ 	if (i % 5 == 0)
+ 	{
+ 		Console.WriteLine<a href="wiki?edit=WriteLine" rel="nofollow">?</a>("Buzz");
+ 		continue;
+ 	}
+ 	Console.WriteLine<a href="wiki?edit=WriteLine" rel="nofollow">?</a>(i);
+ }
+<p></p>
+</pre>
+C# (deleted scene)
+<p></p>
+for(int x = 1; x &lt;= 100; x++)
+{
+<pre>	string output = "";
+	if(x%3 == 0) output += "Fizz";
+	if(x%5 == 0) output += "Buzz";
+	if(output == "") output = x.ToString<a href="wiki?edit=ToString" rel="nofollow">?</a>();
+	Console.WriteLine<a href="wiki?edit=WriteLine" rel="nofollow">?</a>(output);
+</pre>
+}
+<p></p>
+=====================================
+<p></p>
+<p></p>
+Inelegantly, in Haskell (by agox):
+<p></p>
+<pre> fizzbuzz xs = [if x `mod` 3 == 0 &amp;&amp; x `mod` 5 == 0 then "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+		 else if x `mod` 3 == 0 then "Fizz"
+		 else if x `mod` 5 == 0 then "Buzz"
+		 else show x
+		 | x &lt;- xs]
+<p></p>
+</pre>
+<hr>
+<p></p>
+-- A Haskell implementation optimised for reading (by cruftee):
+<p></p>
+main = print [ fizzbuzz x | x &lt;- [1..100] ]
+<pre>	where fizzbuzz x
+		| x `multipleOf` [3, 5] = "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+		| x `multipleOf` [3]	= "Fizz"
+		| x `multipleOf` [5]	= "Buzz" 
+		| otherwise		= show x
+		where m `multipleOf` ns = 
+			all (\n -&gt; m `mod` n == 0) ns
+<p></p>
+</pre>
+-- A Haskell implementation that makes an infinite list, taking only the words you want for every prime as a list IN ONE LINE (by bb010g):
+<p></p>
+<pre>  (\words -&gt; let minus xs ys = if tail xs == [] then xs else case (compare (head xs) (head ys)) of LT -&gt; (head xs):minus (tail xs) ys; EQ -&gt; minus (tail xs) (tail ys); GT -&gt; minus xs (tail ys) in fmap ((\q n -&gt; let pairs = zip (fix (\f (p:xs) -&gt; p : f (xs `minus` [p*p, p*p+2*p..])) $ [3,5..]) q in let string = concatMap (\x -&gt; if (n `mod` (fst x)) == 0 then snd x else "") pairs in if string == "" then show n else string) words) [1..])
+<p></p>
+</pre>
+-- Use as follows: "take 420 $ ($FUNCTION) ["Fizz","Buzz","Bizz","Bazz","Boom","Bang"]". The words get associated with primes, starting from 3 (3,5,7,9,11,13,17...).
+<p></p>
+<hr>
+<p></p>
+In python:
+<p></p>
+for i in xrange(1,101): print [i,'Fizz','Buzz','<a href="wiki?FizzBuzz">FizzBuzz</a>'][(i%3==0)+2*(i%5==0)]
+<p></p>
+simple and clear:
+<p></p>
+for n in range(1,101): print (<em> if n%3 else 'Fizz')+(</em> if n%5 else 'Buzz') or n
+<p></p>
+<hr>
+<p></p>
+Python:
+<p></p>
+Perhaps clearer and more easily extensible.
+<p></p>
+<pre>  values = ((3, "Fizz"), (5, "Buzz"))
+  for n in range(1, 101):
+	res = ''.join(v for (k, v) in values if not n % k)
+	print(res if res else n)
+<p></p>
+</pre>
+- jefallbright
+<p></p>
+<hr>
+<p></p>
+Python for readability:
+<p></p>
+<pre>  for num in range (1, 101):																	
+	fizz = "" if num % 3 else "Fizz"															  
+	buzz = "" if num % 5 else "Buzz"															  
+	print fizz + buzz if fizz or buzz else num 
+<p></p>
+</pre>
+- @espeed
+<p></p>
+<hr>
+<p></p>
+Awesome C# version using custom numeric format strings:
+<p></p>
+for (int i = 1; i &lt; 101; i++) Console.WriteLine<a href="wiki?edit=WriteLine" rel="nofollow">?</a>("{0:#;}{1:;;Fizz}{2:;;Buzz}", i % 3 * i % 5 == 0 ? 0 : i, i % 3, i % 5);
+<p></p>
+<hr>
+<p></p>
+In ABAP
+<p></p>
+DATA: l_mod3  TYPE i,
+<pre>	l_mod5  TYPE i.
+<p></p>
+</pre>
+DO 100 TIMES.
+<pre>  l_mod3 = sy-index MOD 3.
+  l_mod5 = sy-index MOD 5.
+<p></p>
+  IF l_mod3 = 0 AND l_mod5 = 0.
+	WRITE : / '<a href="wiki?FizzBuzz">FizzBuzz</a>'.
+	CONTINUE.
+  ENDIF.
+<p></p>
+  IF l_mod3 = 0.
+	WRITE : / 'Fizz'.
+	CONTINUE.
+  ENDIF.
+<p></p>
+  IF l_mod5 = 0.
+	WRITE : / 'Buzz'.
+	CONTINUE.
+  ENDIF.
+<p></p>
+  WRITE : / sy-index.
+</pre>
+ENDDO.
+<p></p>
+<hr>
+<p></p>
+C++ again:
+<p></p>
+<pre>	#include &lt;iostream&gt;
+	#include &lt;cstdlib&gt;
+<p></p>
+	struct Matcher {
+		int multiple;
+		const int factor;
+		const char * const noise;
+		inline Matcher (int n, const char * s) : multiple (n), factor (n), noise (s) { }
+		inline void operator () (int n, bool &amp;toSetIfMatched) {
+		if (n &gt; multiple)
+			multiple += factor;
+		else if (n == multiple)
+			toSetIfMatched = true, std::cout &lt;&lt; noise;
+		}
+	};
+<p></p>
+	int
+	main (int ac, char **av)
+	{
+		int upTo = ac &gt; 1 ? atoi (av[1]) : 100;
+<p></p>
+		Matcher threes { 3, "Fizz" };
+		Matcher fives { 5, "Buzz" };
+<p></p>
+		for (int n = 1; n &lt;= upTo; ++n) {
+			bool matched = false;
+			threes (n, matched);
+			fives (n, matched);
+			if (!matched)
+				std::cout &lt;&lt; n;
+			std::cout &lt;&lt; '\n';
+		}
+		return EXIT_SUCCESS;
+	}
+<p></p>
+</pre>
+<em>Wow.  Peculiar, unclear, <strong>and</strong> inefficient.  Nice!</em>
+<p></p>
+<p></p>
+I'm not even a programmer! I'm an artist!
+<p></p>
+public class <a href="wiki?FizzBuzz">FizzBuzz</a>
+{
+<pre>	public static void main( String [] args ) {
+	Object[] arr= new Object[101];
+	for(int i=1; i&lt;101; i++) {
+	  if(i%3==0&amp;&amp;i%5==0) arr[i]="fizzbuzz";
+	  else if(i%3==0) arr[i]="fizz";
+	  else if(i%5==0) arr[i]="buzz";
+	  else arr[i]=i;
+	  System.out.println(arr[i]);
+	}
+	print(arr);
+	}
+</pre>
+}
+<p></p>
+<hr>
+<p></p>
+Another PHP solution, extensible for additional values
+<p></p>
+<pre>	$map = array(3=&gt;"Fizz",5=&gt;"Buzz" /*,7=&gt;"Bazz"*/);
+	$i=0;
+	while ($i&lt;100) {
+		++$i;
+		$res = $i;
+		foreach ($map as $k=&gt;$v) {
+			if ($i%$k == 0) $res .= $v;
+		}
+		echo " $res, ";
+	}
+<p></p>
+</pre>
+<hr>
+<p></p>
+I see there's no lisp solution. While I'm at it, let me implement syntax that generalizes the idea of evaluating any sequence of independent conditionals, and a final "if-not" part for when none of them met the condition.
+This should be R7RS-Small compliant Scheme (R5RS if it weren't for the named let):
+<p></p>
+<pre>  (define-syntax any-or
+	(syntax-rules ()
+	((any-or (condition action) ... (if-none if-none-action))
+	(let ((any-condition-met #f))
+	 (when condition
+		(set! any-condition-met #t)
+		action)
+	 ...
+	 (if (not any-condition-met)
+		if-none-action)))))
+<p></p>
+  (define (fizz-buzz)
+	(let loop ((i 0))
+	(any-or
+	((zero? (modulo i 3)) (display "Fizz"))
+	((zero? (modulo i 5)) (display "Buzz"))
+	(if-none (display i)))
+	(newline)
+	(unless (= 100 i)
+	(loop (+ 1 i)))))
+<p></p>
+</pre>
+<hr>
+You can do it nicely in Lua.
+<p></p>
+<pre>	function fizzbuzz()
+		-- without repeating logic
+		for i = 1, 100 do
+			local isfizz = 0 == (i % 3) and io.write"Fizz"
+			local isbuzz = 0 == (i % 5) and io.write"Buzz"
+			if not isfizz and not isbuzz then
+				io.write(i)
+			end
+			io.write("\n")
+		end
+	end
+	fizzbuzz()
+<p></p>
+	function fizzbuzz()
+		-- with repeating logic
+		for i = 1, 100 do
+			print(
+<ol>
+<ol>
+<ol>
+<ol>
+<li> == (i % (3*5)) and "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+</li></ol>
+</ol>
+</ol>
+</ol>
+				or  0 == (i % 3	) and "Fizz"
+				or  0 == (i % 5	) and "Buzz"
+				or  i
+			)
+		end
+	end
+	fizzbuzz()
+<p></p>
+</pre>
+I'm not sure if there's a way to do this without either duplicating logic or using variables. -- DecoPerson<a href="wiki?edit=DecoPerson" rel="nofollow">?</a>
+<p></p>
+<hr>
+The above <a href="wiki?LuaLanguage">LuaLanguage</a> solutions seem inelegant. Here's the most straightforward approach to the problem:
+<p></p>
+<pre>	for i = 1, 100 do
+<p></p>
+	local fizz = 0 == i % 3
+	local buzz = 0 == i % 5
+<p></p>
+	if fizz and buzz then
+		print "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+<p></p>
+	elseif fizz then
+		print "Fizz"
+<p></p>
+	elseif buzz then
+		print "Buzz"
+<p></p>
+	else
+		print(i)
+	end
+	end
+<p></p>
+<p></p>
+</pre>
+And this is a version of the above which abuses boolean logic to 'golf' the output into a single call to print():
+<p></p>
+<pre>	for i = 1, 100 do
+<p></p>
+	local fizz = 0 == i % 3
+	local buzz = 0 == i % 5
+<p></p>
+	print( (fizz or buzz) and
+		((fizz and "Fizz" or "") .. (buzz and "Buzz" or "")) or i )
+	end
+<p></p>
+<p></p>
+</pre>
+<hr>
+<p></p>
+Here is a Javascript implementation that does not use ifs:
+<p></p>
+<pre>	var input = [];
+	for (i = 1; i &lt;= 100; ++i) {
+		input[i - 1] = i;
+	}
+<p></p>
+	var divisibleBy = function(what, inputList) {
+		return inputList.filter(function(item, index) {
+			return !(item % what);
+		});
+	};
+<p></p>
+	var fizzes = divisibleBy(3, input);
+	var buzzes = divisibleBy(5, input);
+	var fizzbuzzes = divisibleBy(15, input);
+<p></p>
+	var transform = function(to, onWhat) {
+		return function(item, index) {
+			onWhat[item - 1] = to; 
+		};
+	};
+<p></p>
+	fizzes.each(transform("Fizz", input));
+	buzzes.each(transform("Buzz", input));
+	fizzbuzzes.each(transform("<a href="wiki?FizzBuzz">FizzBuzz</a>", input));
+<p></p>
+	input.each(function(item, index) {
+		document.write(item + "&lt;br&gt;");
+	});
+<p></p>
+<p></p>
+</pre>
+C# 
+<pre>  private void mmain()
+	{
+		for (int i = 0; i &lt;= 100; i++)
+		{
+		Multiplicity result = CheckMultiplicity<a href="wiki?edit=CheckMultiplicity" rel="nofollow">?</a>(i);
+		PrintAccordingToMultiplicity<a href="wiki?edit=PrintAccordingToMultiplicity" rel="nofollow">?</a>(result, i);
+		}
+	}
+	private Multiplicity CheckMultiplicity<a href="wiki?edit=CheckMultiplicity" rel="nofollow">?</a>(int i)
+	{
+		if (IsMultipleOf5An3(i))
+		{
+		return Multiplicity.IsMultipleOf5An3;
+		}
+		if (IsMultipleOf5(i))
+		{
+		return Multiplicity.IsMultipleOf5;
+		}
+		if (IsMultipleOf3(i))
+		{
+		return Multiplicity.IsMultipleOf3;
+		}
+		return Multiplicity.IsMultipleOfNone<a href="wiki?edit=IsMultipleOfNone" rel="nofollow">?</a>;
+	}
+	private bool IsMultipleOf5An3(int n)
+	{
+		return IsMultipleOf5(n) &amp;&amp; IsMultipleOf3(n);
+	}
+	private bool IsMultipleOf5(int n)
+	{
+		return IsMultipleOf<a href="wiki?edit=IsMultipleOf" rel="nofollow">?</a>(n, 5);
+	}
+	private bool IsMultipleOf3(int n)
+	{
+		return IsMultipleOf<a href="wiki?edit=IsMultipleOf" rel="nofollow">?</a>(n, 5);
+	}
+	private bool IsMultipleOf<a href="wiki?edit=IsMultipleOf" rel="nofollow">?</a>(int n, int mulNumber)
+	{
+		return n % mulNumber == 0;
+	}
+<p></p>
+	void PrintAccordingToMultiplicity<a href="wiki?edit=PrintAccordingToMultiplicity" rel="nofollow">?</a>(Multiplicity mm, int n)
+	{
+		switch (mm)
+		{
+		case Multiplicity.IsMultipleOf3:
+			break;
+		case Multiplicity.IsMultipleOf5:
+			break;
+		case Multiplicity.IsMultipleOf5An3:
+			break;
+		case Multiplicity.IsMultipleOfNone<a href="wiki?edit=IsMultipleOfNone" rel="nofollow">?</a>:
+			break;
+		}
+	}
+	enum Multiplicity { IsMultipleOf3, IsMultipleOf5, IsMultipleOf5An3, IsMultipleOfNone<a href="wiki?edit=IsMultipleOfNone" rel="nofollow">?</a> };
+<p></p>
+</pre>
+<hr>
+Matlab:
+<p></p>
+% <a href="wiki?FizzBuzz">FizzBuzz</a> by "Cause"
+<p></p>
+for inum = 1:100
+<pre>  fizzbuzz = '';
+  if mod(inum,3) == 0
+	fizzbuzz = [fizzbuzz 'Fizz'];
+  end
+  if mod(inum,5) == 0
+	fizzbuzz = [fizzbuzz 'Buzz'];
+  end
+  if isempty(fizzbuzz)
+	disp(inum)
+  else
+	disp(fizzbuzz)
+  end
+</pre>
+end
+<p></p>
+<hr>
+<p></p>
+function [  ] = fizzbuzz( n )
+<pre>	% another MATLAB solution
+	cells=arrayfun(@(x) num2str(x),1:n,'uni',false);
+	[ cells{3:3:n} ] = deal('Fizz');
+	[ cells{5:5:n} ] = deal('Buzz');
+	[ cells{15:15:n} ] = deal('<a href="wiki?FizzBuzz">FizzBuzz</a>');
+	disp(sprintf('%s\n',cells{:}));
+</pre>
+end
+<p></p>
+<hr>
+<p></p>
+<pre>	% alternative script to demonstrate <a href="wiki?FizzBuzz">FizzBuzz</a> in Matlab without loops, by Stoove
+<p></p>
+	%create cell array, first column should be integers 1-100. also spacer column
+	i = transpose(linspace(1,100));
+	c(1:100,1) = cellstr( int2str( i ) );
+	c(1:100,2:3) = cellstr('');
+	spacer(1:100,1) = ' ';
+<p></p>
+	%logic only requires two logical index functions
+	c(mod(i,3)==0,2) = cellstr('fizz');
+	c(mod(i,5)==0,3) = cellstr('buzz');
+<p></p>
+	%string array for printing
+	[ char(c(:,1)) spacer char( strcat(c(:,2),c(:,3)) ) ]
+<p></p>
+</pre>
+<hr>
+<p></p>
+Common Lisp using conditional formatting:
+<p></p>
+<pre>  (loop for i from 1 to 100 do
+	(format t "~[Fizz~;~]~[Buzz~;~]~:[~a~;~] "
+	(mod i 3) (mod i 5) (zerop (* (mod i 3) (mod i 5))) i))
+<p></p>
+</pre>
+or with named predicates
+<p></p>
+<pre>  (loop for i from 1 to 100 do
+	(let ((fizz (zerop (mod i 3)))
+	  (buzz (zerop (mod i 5))))
+	(format t "~:[~;Fizz~]~:[~;Buzz~]~:[~a~;~] "
+	fizz buzz (or fizz buzz) i)))
+<p></p>
+</pre>
+or with circular lists and type punning
+<p></p>
+<pre>  (loop for i from 1 to 100
+	and x in '#1=("" "" "Fizz" . #1#)
+	and y in '#2=("" "" "" "" "Buzz" . #2#) do
+	(unless (concatenate 'list (princ x) (princ y))
+	  (princ i))
+	(terpri)))
+<p></p>
+</pre>
+<hr>
+<p></p>
+I didn't see a concise Java solution above.
+<p></p>
+<pre> for (int i = 1; i &lt;= 100; i++) {
+	String thisLine = "";
+	if (i % 3 == 0) thisLine = thisLine + "Fizz";
+	if (i % 5 == 0) thisLine = thisLine + "Buzz";
+	if (thisLine.isEmpty()) thisLine = String.valueOf(i);
+	System.out.println(thisLine);
+ }
+<p></p>
+<p></p>
+</pre>
+<hr>
+Fizz buzz in Oracle PL/SQL.
+<p></p>
+select
+<pre>  iteration,
+  decode(iteration / 3, trunc(iteration / 3), 'fizz') ||
+  decode(iteration / 5, trunc(iteration / 5), 'buzz') || ' ' as fizzbuzz
+</pre>
+from
+(
+select level as iteration from dual connect by level &lt;= 100
+)
+<p></p>
+<p></p>
+<p></p>
+Or more precisely/efficiently (Ok, pedantically)
+<p></p>
+select decode(level, trunc(level / 15)*15, 'fizzbuzz', trunc(level/3)*3, 'fizz', trunc(level/5)*5, 'buzz', level) 
+from dual connect by level &lt;= 100;
+<p></p>
+--@<a href="wiki?BrenBart">BrenBart</a>
+<p></p>
+<p></p>
+<hr>
+Fizz buzz in Java - generalized to handle any number fizzes, buzzes or other modulus operations
+<p></p>
+public class <a href="wiki?FizzBuzz">FizzBuzz</a> {
+<pre>	public static void main(String[] args) {
+		(new <a href="wiki?FizzBuzz">FizzBuzz</a>()).deFizz(1, 100, new int[] {3,5}, new String[] {"Fizz", "Buzz"}, System.out);
+	}
+<p></p>
+	public void deFizz(int min, int max, int[] mods, String[] modsVals, PrintStream<a href="wiki?edit=PrintStream" rel="nofollow">?</a> writer) {
+		if( writer == null ) { throw new <a href="wiki?IllegalArgumentException">IllegalArgumentException</a>("Writer must not be null"); }
+		if( mods == null || modsVals == null ) { throw new <a href="wiki?IllegalArgumentException">IllegalArgumentException</a>("Mods and ModsVals<a href="wiki?edit=ModsVals" rel="nofollow">?</a> must not be null"); }
+		int modsSize = mods.length;
+		if(modsSize == 0 || mods.length != modsVals.length) { throw new <a href="wiki?IllegalArgumentException">IllegalArgumentException</a>("Mods and ModsVals<a href="wiki?edit=ModsVals" rel="nofollow">?</a> must have more than one value and the same number of agruments"); }
+<p></p>
+		for(int count = min; count &lt;= max; count++) {
+			boolean match = false;
+			for(int countIn = 0; countIn &lt; modsSize; countIn++ ) {
+				if( count % mods[countIn] == 0 ) { writer.print(modsVals[countIn]); match = true; }
+			}
+			if(!match) { writer.print(count); }
+			writer.println("");
+		}
+	}
+</pre>
+}
+<p></p>
+<p></p>
+---
+<p></p>
+Another in PHP - 0 returned from the Modulus is false and a positive value is true.
+And while we're at it, why not use while? It gets lonely.
+<p></p>
+$i = 1;
+while ($i &lt;= 100) 
+{
+<pre>	if (!($i%3))
+	print "Fizz";
+	if (!($i%5))
+	print "Buzz";
+	if ($i%3 &amp;&amp; $i%5) 
+	print $i;
+<p></p>
+	print "\n";	
+	$i++;
+</pre>
+}
+<p></p>
+<hr>
+Scala!
+<p></p>
+<pre>	(1 to 100) foreach { n =&gt; 
+		if (n % 3 == 0) print("Fizz")
+		if (n % 5 == 0) print("Buzz")
+		if (n % 3 != 0 &amp;&amp; n % 5 != 0) print(n)
+		println
+	}
+</pre>
+<hr>
+<p></p>
+<hr> F#
+<p></p>
+[1..100] 
+|&gt; Seq.map (function
+<pre>	| x when x%5=0 &amp;&amp; x%3=0 -&gt; "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+	| x when x%3=0 -&gt; "Fizz"
+	| x when x%5=0 -&gt; "Buzz"
+	| x -&gt; string x)
+</pre>
+|&gt; Seq.iter (printfn "%s")
+<p></p>
+<hr>
+<p></p>
+Surprise, more python! This time in a single list comprehension
+<p></p>
+['fizzbuzz' if i % 3 == 0 and i % 5 == 0 else 'fizz' if i % 3 == 0 else 'buzz' if i % 5 == 0 else i for i in range(1,101)] 
+<p></p>
+<hr>
+<p></p>
+BASIC without IF or Modulo operator (Tested with Commodore BASIC 2.0) 
+<p></p>
+<pre> 100 print chr$(14):rem Select uppercase/Lowercase mode on Commodore 
+ 110 dim nr$(100) 
+ 120 for x=1 to 100:nr$(x)=str$(x):next 
+ 130 for x=3 to 100 step 3:nr$(x)="Fizz":next 
+ 140 for x=5 to 100 step 5:nr$(x)="Buzz":next 
+ 150 for x=3*5 to 100 step 3*5:nr$(x)="Fizz"+"Buzz":next 
+ 160 for x=1 to 100:Print nr$(x):next 
+ 170 end
+<p></p>
+</pre>
+<hr>
+<p></p>
+Another point of view in terms of performance...
+<p></p>
+<pre> I think the following test
+	if (theNumber is divisible by 3) and (theNumber is divisible by 5) then
+<p></p>
+</pre>
+should be the last, as it would fail 14 times before it is true; while testing for divisible by 3 only fails twice before it is true.
+<p></p>
+<hr>
+<p></p>
+Fizz buzz in Bash...
+<p></p>
+<pre> #!/bin/bash
+<p></p>
+ for i in {1..100}
+ do
+	if [ $(($i % 3)) = 0 ]; then
+	echo -n "Fizz"
+	fi
+	if [ $(($i % 5)) = 0 ]; then
+	echo -n "Buzz"
+	fi
+	if [ $(($i % 3)) != 0 ] &amp;&amp; [ $(($i % 5)) != 0 ]; then
+	echo -n "$i"
+	fi
+	echo
+ done
+<p></p>
+</pre>
+<hr>
+<p></p>
+Alternative Fizz buzz Bash implementation (performs fewer operations than above, so slightly faster):
+<p></p>
+<pre> #!/bin/bash
+<p></p>
+ for i in {1..100}
+ do
+	s=""
+	if [ $(($i % 3)) = 0 ]; then
+	s="Fizz"
+	fi
+	if [ $(($i % 5)) = %d\n0 ]; then
+	s="${s}Buzz\nBuzz"
+	fi
+	if [ "$s" = "" ]; then
+	s=$i
+	fi
+	echo $s
+ done
+<p></p>
+<p></p>
+</pre>
+<hr>
+<pre> If you're doing something small like fizzbuzz over and over, you may care about performance aspects of your code
+ (and comments on this won't hurt if you are interviewing)
+ Still interested in why or why not people might find fizzbuzz hard to do.
+ I'm with an early poster in thinking that if a person can't do something they've not seen in class, 
+ they probably aren't a good risk -- but the aesthetic hesitation maybe can be shaken loose.
+<p></p>
+<p></p>
+ int  i;
+<p></p>
+ // implementation 1
+ // 0 tests (are ifs expensive on your architecture?)
+ // 2 mods, 1 bitwise op, 3 logical ops per i (mods are usually expensive)
+ // 1 array store and 1 array fetch per i (in what part of memory iBuzz\ns that array and how expensive to access it?)
+ // also a conversion from int to string for 8/15 of the i
+ // 36 chars used in memory 
+ // this one does not use any knowledge re: the incidence of multiples of 3, 5, 15
+ // could get rid of the store using the nice formatting one halfway up the page above
+ // could get rid of the store and the conversion for 7/15 of the i by including an if-test
+<p></p>
+ char fb_array[4][9] = {"	", "fizz", "buzz", "fizzbuzz"};	
+ for (i=1; i&lt;=100; i++)
+ {
+	sprintf(fb_array[0], "%d", i);
+	printf("%s\n", fb_array[ !(i%3) ^ (!(i%5))&lt;&lt;1 ] );
+ }
+<p></p>
+<p></p>
+<p></p>
+ // implementation 2 	
+ // 2 if-tests -- 2 mods/2 logical ops per i
+<p></p>
+ for (i=1; i&lt;=100; i++)
+ {
+	if (!(i%3))
+	{
+		printf("fizz");
+		if (!(i%5))
+			printf("buzz\n");
+		else
+			printf("\n");
+	}
+	else if (!(i%5))
+		printf("buzz\n");
+	else
+		printf("%i\n", i);
+ }
+<p></p>
+ // implementation 3
+ // uses knowledge about incidence of multiples of 3, 5, 15
+ // up to 3 if-tests and up to 3 mods/3 logical ops per i
+ // expected ~2.75 if-tests and ~2.75 mods/logical ops per i
+<p></p>
+ for (i=1; i&lt;=100; i++)
+ {
+	if (!(i%15))
+		printf("fizzbuzz\n");
+	else if (!(i%3))
+		printf("fizz\n");
+	else if (!(i%5))
+		printf("buzz\n");
+	else
+		printf("%i\n", i);
+ }
+<p></p>
+ // implementation 4 
+ // 3 if-tests and 4 mods/3 logical ops per i
+<p></p>
+ for (i=1; i&lt;=100; i++)
+ {
+	if (!(i%3))
+		printf("fizz");
+	if (!(i%5))
+		printf("buzz");
+	if ((i%3)&amp;&amp;(i%5))
+		printf("%i", i);
+	printf("\n");
+ }
+<p></p>
+<p></p>
+<p></p>
+</pre>
+<hr>
+<p></p>
+<pre> For each i: perform 2 increments, 2 NOTs, 2 adds, 0-2 register writes
+ One time setup up front: 2 mods, 2 ifs, 0-2 adds/register writes
+ Counter-based solution, NO expensive mods after the initial setup
+ This one allows for arbitrary lower and upper, not just 1 and 100
+ Negative values work for lower and upper as well.
+<p></p>
+ int main () {
+<p></p>
+	const int FIZZ_NUMBER = 3;
+	const int BUZZ_NUMBER = 5;
+	int lower=1;
+	int upper=100;
+	int i;
+<p></p>
+	register int fizz_counter=(lower%FIZZ_NUMBER);
+	register int buzz_counter=(lower%BUZZ_NUMBER);
+	if (fizz_counter&lt;0)
+		fizz_counter = FIZZ_NUMBER+fizz_counter;
+	if (buzz_counter&lt;0)
+		buzz_counter = BUZZ_NUMBER+buzz_counter;
+<p></p>
+	for (i=lower; i&lt;=upper; i++)
+	{
+		if (!(fizz_counter-FIZZ_NUMBER))
+		{
+			printf("fizz");
+			fizz_counter=0;
+			if (!(buzz_counter-BUZZ_NUMBER))
+			{
+				printf("buzz");
+				buzz_counter=0;
+			}
+			printf("\n");
+		}
+		else if (!(buzz_counter-BUZZ_NUMBER))
+		{
+			printf("buzz\n");
+			buzz_counter=0;
+		}
+		else
+			printf("%i\n", i);
+		fizz_counter++;
+		buzz_counter++;
+	}
+<p></p>
+	return(0);
+ }
+<p></p>
+</pre>
+<hr>
+<p></p>
+C++ one-line code without duplicating string literals and without using additional variables.
+<p></p>
+<pre> #include &lt;iostream&gt;
+ using namespace std;
+<p></p>
+ int main()
+ {
+	for (int i = 1; (i &amp; 0x0FF) &lt;= 100; ++i &amp;= 0x0FF)
+	cout &lt;&lt; (!((i &amp; 0x0FF) % 3) ? (i |= 0x100), "Fizz" : "") &lt;&lt; (!((i &amp; 0x0FF) % 5) ? (i |= 0x100), "Buzz" : ""), ((i &amp; 0x100) ? cout &lt;&lt; "" : cout&lt;&lt; i), cout &lt;&lt; "\n"; 
+ }
+<p></p>
+</pre>
+--bitekas
+<p></p>
+<hr>
+<p></p>
+my simple python code:
+<p></p>
+def isMultipleOf(firstNum, secondNum):
+<pre>	return firstNum % secondNum == 0;
+<p></p>
+</pre>
+def fizzBuzz(num):
+<pre>	if isMultipleOf(num,3) and not isMultipleOf(num,5):
+		return "Fizz"
+<p></p>
+	elif isMultipleOf(num,5) and not isMultipleOf(num,3):
+		return "Buzz"
+<p></p>
+	elif isMultipleOf(num,5) and isMultipleOf(num,3):
+		return "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+	else:
+		return num
+<p></p>
+</pre>
+for i in range(0,100):
+<pre>	print fizzBuzz(i)
+<p></p>
+</pre>
+--sayz
+<p></p>
+<p></p>
+<p></p>
+<hr>
+<p></p>
+I think the problem people have with fizzbuzz is that it doesn't *seem* to map exactly to the tree structure that nested if-then-else produces. You can get a balanced tree out of it, but one of the mod choices shows up twice in the tree. This is perfectly OK, but leaves the impression that it could be done more efficiently. 
+<p></p>
+Fizzbuzz maps to a simple poset. If you were asked to describe how to get to that place two blocks away, you would say: one block east then one block north, or else one block north and one block east -- and you would be thinking about a rectangular city block structure. You wouldn't be thinking about: either go north or go east; now if you've gone north, etc -- unless you'd already started down one of those paths, in which case, you've chosen one of the branches, and the problem has become a tree anyway. 
+<p></p>
+Fizzbuzz also maps to a sieve. 
+<p></p>
+In a way, fizzbuzz seems like an exercise in seeing how well the applicant can either 1) correctly program a problem that doesn't immediately map to the logical structures at hand, or else 2) put together some logical structures that do map to the underlying problem. Either one of these skills applies to any position I've ever worked.
+<p></p>
+I thought about what happens when you include more number-word combos, like adding in 7/beep. How does it generalize? How understandable and maintainable is it? How well does it map to the underlying structure of the problem?
+<p></p>
+Here's the balanced tree version. Yuck! The structure of the problem is really unclear from a reading, although the tree is balanced.
+<p></p>
+<pre> int main(int argc, char *argv[])
+ {
+	int i;
+	// 3 if-tests -- 3 mods/3 logical ops per i
+	// for n number-word combos, get n if-tests -- n mods/n logical ops per i
+	for (i=1; i&lt;=105; i++)
+	{
+		if (!(i%3))
+		{
+			printf("fizz");
+			if (!(i%5))
+			{
+				printf("buzz");
+				if (!(i%7))
+					printf("beep\n");
+				else 
+					printf("\n");
+			}
+			else if (!(i%7))
+				printf("beep\n");
+			else
+				printf("\n");
+		}
+		else if (!(i%5))
+		{
+			printf("buzz");
+			if (!(i%7))
+				printf("beep\n");
+			else 
+				printf("\n");
+		}
+		else if (!(i%7))
+			printf("beep\n");
+		else
+			printf("%i\n", i);
+	}
+	 return 0;
+ }
+<p></p>
+<p></p>
+</pre>
+Here's a version that to me preserves the poset structure, via the array. I like this because the poset is exposed, and maybe you'll want that structure down the road.
+<p></p>
+<pre> int main(int argc, char *argv[])
+ {
+	int i;
+	 // 0 tests -- 3 mods, 2 bitwise op, 3 logical ops per i
+	 // also an array store and an array fetch per i
+	 // 2*2*2*14 = 112 chars used in mem
+	 // 0 tests -- n mods, n-1 bitwise op, n logical ops per i
+	 // plus 2*n array stores as an initial setup
+	 // 2^n*length chars used in mem
+<p></p>
+	 char fb_array[2][2][2][14];
+	 sprintf(fb_array[0][0][0], "");
+	 sprintf(fb_array[0][0][1], "fizz");
+	 sprintf(fb_array[0][1][0], "buzz");
+	 sprintf(fb_array[0][1][1], "fizzbuzz");
+	 sprintf(fb_array[1][0][0], "beep");
+	 sprintf(fb_array[1][0][1], "fizzbeep");
+	 sprintf(fb_array[1][1][0], "buzzbeep");
+	 sprintf(fb_array[1][1][1], "fizzbuzzbeep");
+<p></p>
+	 for (i=1; i&lt;=105; i++)
+	 {
+		sprintf(fb_array[0][0][0], "%d", i);
+		printf("%s\n", fb_array[ !(i%7) ] [ !(i%5) ][ !(i%3) ] );
+	 }
+	 return 0;
+ }
+<p></p>
+<p></p>
+</pre>
+Here's the sieve version. I like this because the structure of the sieve is clear.
+<p></p>
+<pre> int main(int argc, char *argv[])
+ {
+	int i;
+	// 4 if-tests -- 3 mods/3 logical ops per i
+	// for n number-word combos, n+1 if-tests -- n mods/n logical ops per i
+	int match;		
+	for (i=1; i&lt;=105; i++)
+	{
+		match = 0;				
+		if (!(i%3))
+		{
+			printf("fizz");
+			match = 1;
+		}
+		if (!(i%5))
+		{
+			printf("buzz");
+			match = 1;
+		}
+		if (!(i%7))
+		{
+			printf("beep");
+			match = 1;			
+		}
+		if (match) printf("\n");
+		else printf ("%i\n", i);
+<p></p>
+	}
+	 return 0;
+ }
+<p></p>
+<p></p>
+<p></p>
+</pre>
+<hr> 
+<p></p>
+No, not a poset, because you have to hit "fizz" before "buzz" (you never see "buzzfizz").
+Here's a less wasteful database version. This is easily changed to accommodate more (or fewer) entries of the form 3/fizz
+<p></p>
+<pre> int main () {
+<p></p>
+	const int values = 3; // you can change this
+	const int wordlength = 4;
+	struct numberword
+	{
+		int num;
+		char word[wordlength+1];
+	};
+	struct numberword numberword_array[values];
+<p></p>
+	// you can change the next entries
+	numberword_array[0].num = 3;
+	sprintf(numberword_array[0].word, "fizz");
+	numberword_array[1].num = 5;
+	sprintf(numberword_array[1].word, "buzz");
+	numberword_array[2].num = 7;
+	sprintf(numberword_array[2].word, "beep");
+	// if values is not 3, add/take away database entries numberword_array[x] as above, so there are values of these
+<p></p>
+	char string[14];
+<p></p>
+	int i, j;	
+	for (i=1; i&lt;=105; i++)
+	{
+		strcpy(string, "");
+		for (j=0; j&lt;values; j++)
+			strncat(string, numberword_array[j].word, (!(i%numberword_array[j].num))*wordlength);
+		if (*string=='\0') 
+			printf("%i\n", i );
+		else 
+			printf("%s\n", string );
+	}
+	return(0);
+ }
+<p></p>
+</pre>
+<hr>
+Scala again!
+<p></p>
+<pre>	(1 to 100) map { n =&gt; 
+		println {
+			(n % 3, n % 5) match {
+				case (0, 0)	=&gt; "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+				case (0, _)	=&gt; "Fizz"
+				case (_, 0)	=&gt; "Buzz"
+				case _		=&gt; n.toString
+			}
+		}
+	}
+<p></p>
+</pre>
+<hr>
+<p></p>
+C with bit manipulation
+<p></p>
+#include &lt;stdio.h&gt;
+int main(int argc, char *argv){
+<pre>  int i;
+  for(i=0; i&lt;101; i++){
+	switch((i%5 == 0) &lt;&lt; 1 | (i%3 == 0)){
+	case 0: printf("%d\n", i); break;
+	case 1: printf("Fizz\n"); break;
+	case 2: printf("Buzz\n"); break;
+	case 3: printf("<a href="wiki?FizzBuzz">FizzBuzz</a>\n"); break;
+	}
+  }
+</pre>
+}
+<p></p>
+<hr>
+==================================================================================================
+One thing I love, love, love about programming is that there are so many ways to skin the cat and
+yet get the same results. Said another way, I enjoy the various solutions that are only limited by
+the programmers' creativity. Here's a Python example.
+<p></p>
+def fizzBuzz():
+<pre>	x = 1
+	while x &lt; 101:
+		# add any other conditions here
+		# as needed to modify the output
+		if x % 3 == 0 and x % 5 == 0:
+			print("<a href="wiki?FizzBuzz">FizzBuzz</a>")
+		elif x % 5 == 0:
+			print("Buzz")
+		elif x % 3 == 0:
+			print("Fizz")
+		else: print (x)
+		x += 1
+<p></p>
+</pre>
+fizzBuzz()
+==================================================================================================
+<p></p>
+Ruby:
+<p></p>
+class Array
+<pre>  def fizzbuzz(x, word)
+	n = x
+	while x &lt;= self.size
+	self[x - 1] = word
+	x += n
+	end
+	self
+  end
+</pre>
+end
+<p></p>
+(1..100).to_a.fizzbuzz(3, "Fizz").fizzbuzz(5, "Buzz").fizzbuzz(15, "<a href="wiki?FizzBuzz">FizzBuzz</a>")
+<p></p>
+-jbs
+<hr>
+C# without ifs or fors (boilerplate excluded)
+<p></p>
+<pre>  Func&lt;int, string&gt;[,] dict= new Func&lt;int, string&gt;[2,2];
+  dict[0,0] = i =&gt; i.ToString<a href="wiki?edit=ToString" rel="nofollow">?</a>();
+  dict[0,1] = i =&gt; "Fizz";
+  dict[1,0] = i =&gt; "Buzz";
+  dict[1,1] = i =&gt; "<a href="wiki?FizzBuzz">FizzBuzz</a>";
+  Enumerable.Range(1,100).ToList<a href="wiki?edit=ToList" rel="nofollow">?</a>().ForEach<a href="wiki?edit=ForEach" rel="nofollow">?</a>(i =&gt; Console.WriteLine<a href="wiki?edit=WriteLine" rel="nofollow">?</a>(dict[i%3==0?1:0,i%5==0?1:0](i)));
+<p></p>
+</pre>
+or, using the same trick, with a dictionary of dictionaries (and no explicit compares):
+<p></p>
+<pre>  var dict= new Dictionary&lt;bool, Dictionary&lt;bool, Func&lt;int, string&gt;&gt;&gt;
+  {
+	{false, new Dictionary&lt;bool, Func&lt;int, string&gt;&gt; { {false, i =&gt; i.ToString<a href="wiki?edit=ToString" rel="nofollow">?</a>()}, {true, _=&gt; "Fizz"}}},
+	{true, new Dictionary&lt;bool, Func&lt;int, string&gt;&gt; { {false, _ =&gt; "Buzz"}, {true, _=&gt; "<a href="wiki?FizzBuzz">FizzBuzz</a>"}}};
+  }
+<p></p>
+  Enumerable.Range(1,100).ToList<a href="wiki?edit=ToList" rel="nofollow">?</a>().ForEach<a href="wiki?edit=ForEach" rel="nofollow">?</a>(i =&gt; Console.WriteLine<a href="wiki?edit=WriteLine" rel="nofollow">?</a>(dict[i%3==0][i%5==0](i)));
+<p></p>
+</pre>
+or using tuples for a more readable code
+<p></p>
+<pre>  var dict= new Dictionary&lt;Tuple&lt;bool, bool&gt;, Func&lt;int, string&gt;&gt;();
+  dict.Add(Tuple.Create(false, false), i =&gt; i.ToString<a href="wiki?edit=ToString" rel="nofollow">?</a>());
+  dict.Add(Tuple.Create(true, false), i =&gt; "Fizz");
+  dict.Add(Tuple.Create(false, true), i =&gt; "Buzz");
+  dict.Add(Tuple.Create(true, true), i =&gt; "<a href="wiki?FizzBuzz">FizzBuzz</a>");
+<p></p>
+  Enumerable.Range(1,100).ToList<a href="wiki?edit=ToList" rel="nofollow">?</a>().ForEach<a href="wiki?edit=ForEach" rel="nofollow">?</a>(i =&gt; Console.WriteLine<a href="wiki?edit=WriteLine" rel="nofollow">?</a>(dict[Tuple.Create(i%3==0,i%5==0)](i)));
+</pre>
+<hr>
+Generators of a cyclic group define equivalence classes.  We can exploit this to build a program that has no tests, save the loop condition.
+<p></p>
+<pre>  #include &lt;stdio.h&gt;
+  #include &lt;stdlib.h&gt;
+<p></p>
+  const char *fmts[] = {
+	  "%d", "%d", "Fizz", "%d", "Buzz", "Fizz", "%d", "%d",
+	  "Fizz", "Buzz", "%d", "Fizz", "%d", "%d", "<a href="wiki?FizzBuzz">FizzBuzz</a>",
+  };
+  #define NFMTS (sizeof(fmts) / sizeof(fmts[0]))
+<p></p>
+  int
+  main(void)
+  {
+	  int k;
+<p></p>
+	  for (k = 0; k &lt; 100; ++k) {
+		  printf(fmts[k % NFMTS], k + 1);
+		  printf("\n");
+	  }
+<p></p>
+	  return 0;
+  }
+</pre>
+--<a href="wiki?DanCross">DanCross</a>
+<hr>
+My Python entry:
+<p></p>
+<pre>	t = range(3, 101, 3)
+	f = range(5, 101, 5)
+	o = range(1, 101)
+	for i in o:
+	r = []
+	if i in t: r.append('Fizz')
+	if i in f: r.append('Buzz')
+	if not r: r.append(str(i))
+	print ''.join(r)
+</pre>
+<hr>
+C/C++
+#include &lt;iostream&gt;												
+#include &lt;cstdlib&gt;												
+using namespace std;												
+<p></p>
+main() {													
+<pre>	for (int mod3=1, mod5=1, i=1; i&lt;=100; i++)  {								
+	(!mod3) &amp;&amp; cout &lt;&lt; "Fizz";
+	(!mod5) &amp;&amp; cout &lt;&lt; "Buzz";
+	(mod3 &amp;&amp; mod5) &amp;&amp;  cout &lt;&lt; i;
+	cout &lt;&lt; '\n';
+	mod3 += (mod3==2) ? -2 : 1;
+	mod5 += (mod5==4) ? -4 : 1;
+	}
+</pre>
+}
+<p></p>
+Java 
+public static void <a href="wiki?FizzBuzz">FizzBuzz</a>()
+{
+<pre>	for(int i = 1; i &lt;= 100; i++) {
+		if(i % 3 == 0 &amp;&amp; i % 5 == 0)	System.out.println("<a href="wiki?FizzBuzz">FizzBuzz</a>");
+		else if(i % 5 == 0)  System.out.println("Buzz");
+		else if(i % 3 == 0) System.out.println("Fizz");
+		else  System.out.println(i);
+	}
+</pre>
+}
+<hr>
+Shortest C++ ?
+<p></p>
+<pre>  #include &lt;iostream&gt;
+  int main(){
+  	for(int i = 1 ; i &lt;= 100 ; ++i)
+  		( (i%5)? ((i%3)?(cout &lt;&lt; i)
+  				:(cout &lt;&lt; "Fizz"))
+  			: cout &lt;&lt; ((i%3)? "Buzz"
+  					: "<a href="wiki?FizzBuzz">FizzBuzz</a>")
+  		) &lt;&lt; endl;
+  }
+<p></p>
+</pre>
+on one line:
+<p></p>
+<pre>  #include &lt;iostream&gt;
+  int main(){
+  	for(int i = 1 ; i &lt;= 100 ; ++i) ( (i%5)? ((i%3)?(cout &lt;&lt; i):(cout &lt;&lt; "Fizz")): cout &lt;&lt; ((i%3)? "Buzz": "<a href="wiki?FizzBuzz">FizzBuzz</a>")) &lt;&lt; endl;
+  }
+<p></p>
+</pre>
+<hr>
+<p></p>
+Another slightly faster Fizz-Buzz Bash implementation:
+<p></p>
+<pre> #!/bin/bash
+<p></p>
+ for i in {1..100}
+ do
+	if [ $(($i % 15)) = 0 ]; then
+	echo "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+	elif [ $(($i % 3)) = 0 ]; then
+	echo "Fizz"
+	elif [ $(($i % 5)) = 0 ]; then
+	echo "Buzz"
+	else
+	echo $i
+	fi
+ done
+<p></p>
+<p></p>
+</pre>
+<hr>
+<p></p>
+An even faster still Fizz-Buzz Bash implementation:
+<p></p>
+<pre> #!/bin/bash
+<p></p>
+ for i in {1..100}
+ do
+	if [ $(($i % 3)) = 0 ]; then
+	echo -n "Fizz"
+	if [ $(($i % 5)) = 0 ]; then
+	echo "Buzz"
+	else
+	echo
+	fi
+	elif [ $(($i % 5)) = 0 ]; then
+	echo "Buzz"
+	else
+	echo $i
+	fi
+ done
+<p></p>
+</pre>
+<hr>
+<p></p>
+I can't believe there's no LOLCODE yet.
+<p></p>
+<pre> HAI
+ I HAS A CHEEZBURGER ITZ 1
+ IM IN YR LOOP UPPIN YR CHEEZBURGER WILE BOTH SAEM CHEEZBURGER AN SMALLR OF CHEEZBURGER AN 100
+	I HAS A THREE ITZ BOTH SAEM MOD OF CHEEZBURGER AN 3 AN 0
+	I HAS A FIVE ITZ BOTH SAEM MOD OF CHEEZBURGER AN 5 AN 0
+	EITHER OF THREE AN FIVE, O RLY?
+	YA RLY
+	THREE, O RLY?
+	 YA RLY, VISIBLE "FIZZ"!
+	OIC
+	FIVE, O RLY?
+	 YA RLY, VISIBLE "BUZZ"!
+	OIC
+	VISIBLE ""
+	NO WAI
+	VISIBLE CHEEZBURGER
+	OIC
+ IM OUTTA YR LOOP
+ KTHXBYE
+<p></p>
+<p></p>
+</pre>
+<hr>
+<p></p>
+In Ruby, concise yet easily read and comprehended, with no reference to the dreaded 15, and easily extensible if new conditions are to be added:
+<p></p>
+<pre>  (1..100).each do |num|
+	message = ""
+	message &lt;&lt; "fizz" if num%3 == 0
+	message &lt;&lt; "buzz" if num%5 == 0
+	message &lt;&lt; num.to_s if message.length == 0
+	puts message
+  end
+<p></p>
+</pre>
+<hr>
+<p></p>
+# Super-optimized fizzbuzz!
+NO duplicate tests!  NO remainders!  NO use of the dreaded 15!	And in Ruby!
+<p></p>
+<pre> difAnswers = [  nil,	# 1, 16, 31 ...
+		nil,	# 2, 17, 32 ...
+		'fizz',	# 3, 18, 33 ...
+		nil,	# 4, 19
+		'buzz',	# 5, 20
+		'fizz',	# 6, 21
+		nil, nil,
+		'fizz',	# 9, 24
+		'buzz',	# 10, 25
+		nil,
+		'fizz',	# 12, 27
+		nil, nil,
+		'fizzbuzz']  #  15, 30, 45, ... and we're done with the table!
+<p></p>
+ index = -1;
+<p></p>
+ for i in 1..100 do
+  index += 1;
+  if (difAnswers.size &lt;= index) then index = 0; end;  # I said no remainders and I meant it.
+<p></p>
+  result = difAnswers[index];
+  print result ? result : i.to_s, "\n";
+ end
+ #  This is not cheating since the table does not grow even if you extend it to the first trillion integers.
+ #  The least common multiple of 3 and 5 is 15, so the table only has 15 entries.
+<p></p>
+</pre>
+---
+<p></p>
+Yet another Perl one liner, but one that returns an array using map &amp; ternary operators, i.e. akin to the Python list comprehension solutions provided by others:
+<p></p>
+map $_%15==0 ? 'fizzbuzz' : $_%5==0 ? 'buzz' : $_%3==0 ? 'fizz' : $_, 1..100);
+<p></p>
+-or- remove the spaces to make it very hard to follow:
+<p></p>
+map $_%15==0?'fizzbuzz':$_%5==0?'buzz':$_%3==0?'fizz':$_,1..100;
+<p></p>
+-or- the negation of above:
+<p></p>
+map !($_%15)?'fizzbuzz':!($_%5)?'buzz':!($_%3)?'fizz':$_,1..100;
+<p></p>
+Checkout <a href="http://rosettacode.org/wiki/FizzBuzz#Perl" rel="nofollow">http://rosettacode.org/wiki/FizzBuzz#Perl</a> for an even shorter print version, but here's a modified map version of the same:
+<p></p>
+map((Fizz)[$_%3].(Buzz)[$_%5]||$_,1..100);
+<p></p>
+---
+<p></p>
+Here is another Java one.  
+<p></p>
+public static void main()
+<pre>	{
+	String printingStuff; 
+	boolean isMultipul; 
+	for(int i = 0;i &lt;=100;i++)
+	{
+		printingStuff = ""; 
+		isMultipul = false; 
+		if(i%3==0){
+		printingStuff = "Fizz";
+		isMultipul = true; 
+		}
+<p></p>
+		if(i%5==0){
+		printingStuff = printingStuff + "Buzz";
+		isMultipul = true;
+		}
+<p></p>
+		if(!isMultipul){
+		printingStuff = Integer.toString(i); 
+		}
+		System.out.println(printingStuff); 
+<p></p>
+	}
+<p></p>
+	}
+</pre>
+___________________________________________________________________________________________________________________________________________________
+<p></p>
+My Java Code - by Tejas S Murthy
+<p></p>
+<pre>	public static void main(String[] args) {
+		<a href="wiki?StringBuilder">StringBuilder</a> sb = new <a href="wiki?StringBuilder">StringBuilder</a>();
+		String fb = "<a href="wiki?FizzBuzz">FizzBuzz</a>";
+		String b = "Buzz";
+		String f = "Fizz";
+		String n = "\n";
+		for (int i = 1; i &lt;= 100; i++)
+		{
+			sb.append((i%15 == 0 ? fb : (i%15%5 == 0 ?  b : (i%15%3 == 0 ? f : i)))).append(n);
+		}
+		System.out.println(sb.toString());
+<p></p>
+	}
+</pre>
+<hr>
+One liner in Javascript (by CF):
+<pre>	for (var i = 1; i &lt;= 100; i++) console.log((i % 3 ? "" : "Fizz") + (i % 5 ? "" : "Buzz") || i)
+</pre>
+<hr>
+in go (golang)
+<pre>	package main
+<p></p>
+	import "fmt"
+<p></p>
+	func main() {
+	fmt.Println("starting fizzbuzz")
+	c := make([]int, 100)
+	for i := range c {
+		d := i + 1
+		threes := d%3 == 0
+		fives := d%5 == 0
+		if threes &amp;&amp; fives {
+			fmt.Println("<a href="wiki?FizzBuzz">FizzBuzz</a>")
+		} else if threes {
+			fmt.Println("Fizz")
+		} else if fives {
+			fmt.Println("Buzz")
+		} else {
+			fmt.Println(d)
+		}
+	}
+	}
+<p></p>
+</pre>
+<hr>
+Regarding the implementation labeled [ick!!!] at the top, I don't think it's particularly bad when you consider how many tests you need to do on each loop iteration. Yes, it's a bit clunky to have the extra (i % 5) test inside the (i % 3) "if", but the extra code allows a maximum of two tests per iteration, which is pretty efficient.
+<hr>
+<p></p>
+Everyone has been focusing on elegance, efficieny...or just posting whatever their solution is...I thought I'd contribute a little bit of pattern abuse to the tune of Java.
+<p></p>
+<pre> import java.util.List;
+ import java.util.<a href="wiki?ArrayList">ArrayList</a>;
+<p></p>
+ public final class FizzBuzzRunner<a href="wiki?edit=FizzBuzzRunner" rel="nofollow">?</a> {
+	int range;	
+	private FizzBuzzRunner<a href="wiki?edit=FizzBuzzRunner" rel="nofollow">?</a>(int range) {
+	this.range = range;
+	}
+	private void run() {
+	FizzBuzzVisitor<a href="wiki?edit=FizzBuzzVisitor" rel="nofollow">?</a> visitor = new FizzBuzzPrintVisitor<a href="wiki?edit=FizzBuzzPrintVisitor" rel="nofollow">?</a>(new ConsolePrinter<a href="wiki?edit=ConsolePrinter" rel="nofollow">?</a>());
+	for(int i = 1; i &lt;= range; ++i) {
+		FizzBuzzFactory<a href="wiki?edit=FizzBuzzFactory" rel="nofollow">?</a>.create(i).accept(visitor);
+	}
+	}
+	public static void main(String[] args) {
+	if(<a href="wiki?FizzBuzzTest">FizzBuzzTest</a>.runTests()) new FizzBuzzRunner<a href="wiki?edit=FizzBuzzRunner" rel="nofollow">?</a>(100).run();;
+	}
+ }
+<p></p>
+ interface FizzBuzzVisitor<a href="wiki?edit=FizzBuzzVisitor" rel="nofollow">?</a> {
+	public void visit(Fizz fiz);
+	public void visit(Buzz buzz);
+	public void visit(<a href="wiki?FizzBuzz">FizzBuzz</a> fizBuzz);
+	public void visit(Num num);
+ }
+<p></p>
+ interface Printer {
+	public void print(String s);
+ }
+<p></p>
+ class ConsolePrinter<a href="wiki?edit=ConsolePrinter" rel="nofollow">?</a> implements Printer {
+	public void print(String s) {
+	System.out.println(s);
+	}
+ }
+<p></p>
+ class FizzBuzzPrintVisitor<a href="wiki?edit=FizzBuzzPrintVisitor" rel="nofollow">?</a> implements FizzBuzzVisitor<a href="wiki?edit=FizzBuzzVisitor" rel="nofollow">?</a> {
+	private Printer printer;
+	public FizzBuzzPrintVisitor<a href="wiki?edit=FizzBuzzPrintVisitor" rel="nofollow">?</a>(Printer printer) {
+	if(printer == null) throw new <a href="wiki?NullPointerException">NullPointerException</a>();
+	this.printer = printer;
+	}
+	public void visit(Fizz fiz) {
+	printer.print("Fizz");
+	}
+	public void visit(Buzz buzz) {
+	printer.print("Buzz");
+	}
+	public void visit(<a href="wiki?FizzBuzz">FizzBuzz</a> fizBuzz) {
+	printer.print("<a href="wiki?FizzBuzz">FizzBuzz</a>");
+	}
+	public void visit(Num num) {
+	printer.print(Integer.toString(num.getVal()));
+	}
+ }
+<p></p>
+ interface IFizzBuzz {
+	public void accept(FizzBuzzVisitor<a href="wiki?edit=FizzBuzzVisitor" rel="nofollow">?</a> visitor);
+ }
+<p></p>
+ class Fizz implements IFizzBuzz {
+	public void accept(FizzBuzzVisitor<a href="wiki?edit=FizzBuzzVisitor" rel="nofollow">?</a> visitor) {
+	visitor.visit(this);
+	}
+ }
+<p></p>
+ class Buzz implements IFizzBuzz {
+	public void accept(FizzBuzzVisitor<a href="wiki?edit=FizzBuzzVisitor" rel="nofollow">?</a> visitor) {
+	visitor.visit(this);
+	}
+ }
+<p></p>
+ class <a href="wiki?FizzBuzz">FizzBuzz</a> implements IFizzBuzz {
+	public void accept(FizzBuzzVisitor<a href="wiki?edit=FizzBuzzVisitor" rel="nofollow">?</a> visitor) {
+	visitor.visit(this);
+	}
+ }
+<p></p>
+ class Num implements IFizzBuzz {
+	private int val;
+	public Num(int val) {
+	this.val = val;
+	}
+	public int getVal() {
+	return val;
+	}
+	public void accept(FizzBuzzVisitor<a href="wiki?edit=FizzBuzzVisitor" rel="nofollow">?</a> visitor) {
+	visitor.visit(this);
+	}
+ }
+<p></p>
+ final class FizzBuzzFactory<a href="wiki?edit=FizzBuzzFactory" rel="nofollow">?</a> {
+	private FizzBuzzFactory<a href="wiki?edit=FizzBuzzFactory" rel="nofollow">?</a>() {}
+	public static int bit(int i) {
+	return (i == 0) ? i : i/i;
+	}
+	public static IFizzBuzz create(int i) {
+	int switchVal = bit(i%3) + (bit(i%5) &lt;&lt; 1);
+	IFizzBuzz result = null;
+	switch(switchVal) {
+	case 0:
+		result = new <a href="wiki?FizzBuzz">FizzBuzz</a>();
+		break;
+	case 1:
+		result = new Buzz();
+		break;
+	case 2:
+		result = new Fizz();
+		break;
+	case 3:
+		result = new Num(i);
+		break;
+	}
+	return result;
+	}
+ }
+<p></p>
+ /* Simple test framework */
+ final class <a href="wiki?FizzBuzzTest">FizzBuzzTest</a> {
+	private static List&lt;Test&gt; tests = new <a href="wiki?ArrayList">ArrayList</a>&lt;Test&gt;();
+	private <a href="wiki?FizzBuzzTest">FizzBuzzTest</a>() {}
+	public static boolean doTest(Test test) {
+	String msg = test.run();
+	if(msg != null) {
+		System.err.println("Failed test " + test.getName());
+		System.err.println("\t" + msg);
+		return true;
+	}
+	return false;
+	}
+	private static abstract class Test {
+	String name;
+	public String getName() {
+		return name;
+	}
+	public Test(String name) {
+		<a href="wiki?FizzBuzzTest">FizzBuzzTest</a>.tests.add(this);
+		this.name = name;
+	}
+	public abstract String run();
+	}
+	public static boolean runTests() {
+	for(Test test : tests) 
+		if(doTest(test))
+		return false;
+	return true;
+	}
+<p></p>
+	/* Define tests here */
+	static {
+	new Test("testFactory") {
+		public String tryNum(int i, Class expected) {
+		IFizzBuzz result = FizzBuzzFactory<a href="wiki?edit=FizzBuzzFactory" rel="nofollow">?</a>.create(i);
+		if(result == null) {
+			return "FizzBuzzFactory<a href="wiki?edit=FizzBuzzFactory" rel="nofollow">?</a> returned null! expected " + expected.toString();
+		}
+		if(!expected.isInstance(result)) {
+			return "FizzBuzzFactory<a href="wiki?edit=FizzBuzzFactory" rel="nofollow">?</a> return wrong value, expected " + expected.toString() + " for " + i;
+		}
+		return null;
+		}
+<p></p>
+		class FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a> {
+		public final int num;
+		public final Class c;
+		public FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a>(int num, Class c) {
+			this.num = num;
+			this.c = c;
+		}
+		}
+<p></p>
+		public String run() {
+		List&lt;FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a>&gt; testPairs = new <a href="wiki?ArrayList">ArrayList</a>&lt;FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a>&gt;();
+		testPairs.add(new FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a>(3, Fizz.class));
+		testPairs.add(new FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a>(5, Buzz.class));
+		testPairs.add(new FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a>(15, <a href="wiki?FizzBuzz">FizzBuzz</a>.class));
+		testPairs.add(new FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a>(1, Num.class));
+		for(int i = 1; i &lt; 10000; ++i) {
+			FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a> newPair;
+			if((i%3)==0 &amp;&amp; (i%5)==0) newPair = new FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a>(i, <a href="wiki?FizzBuzz">FizzBuzz</a>.class);
+			else if((i%3)==0) newPair = new FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a>(i, Fizz.class);
+			else if((i%5)==0) newPair = new FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a>(i, Buzz.class);
+			else newPair = new FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a>(i, Num.class);
+			testPairs.add(newPair);
+		}
+		for(FacTestPair<a href="wiki?edit=FacTestPair" rel="nofollow">?</a> ftp : testPairs) {
+			String errStr = tryNum(ftp.num, ftp.c);
+			if(errStr != null) return errStr;
+		}
+		return null;
+		}
+	};
+<p></p>
+	abstract class ValidatingPrinterListener<a href="wiki?edit=ValidatingPrinterListener" rel="nofollow">?</a> {
+		public abstract void validate(String str);
+	}
+<p></p>
+	class Validator extends ValidatingPrinterListener<a href="wiki?edit=ValidatingPrinterListener" rel="nofollow">?</a> {
+		public String expected;
+		boolean failed = false;
+		public void setExpected(String str) {
+		this.expected = str;
+		}
+		public void validate(String str) {
+		failed = !expected.equals(str);
+		}
+		public boolean getFailed() {
+		return failed;
+		}
+	}
+	class ValidatingPrinter<a href="wiki?edit=ValidatingPrinter" rel="nofollow">?</a> implements Printer {
+		ValidatingPrinterListener<a href="wiki?edit=ValidatingPrinterListener" rel="nofollow">?</a> listener;
+		ValidatingPrinter<a href="wiki?edit=ValidatingPrinter" rel="nofollow">?</a>(ValidatingPrinterListener<a href="wiki?edit=ValidatingPrinterListener" rel="nofollow">?</a> listener) {
+		this.listener = listener;
+		}
+		public void print(String str) {
+		listener.validate(str);
+		}
+	}
+<p></p>
+	new Test("testVisitor") {
+<p></p>
+		public String run() {
+		Validator validator = new Validator();
+		FizzBuzzVisitor<a href="wiki?edit=FizzBuzzVisitor" rel="nofollow">?</a> visitor = new FizzBuzzPrintVisitor<a href="wiki?edit=FizzBuzzPrintVisitor" rel="nofollow">?</a>(new ValidatingPrinter<a href="wiki?edit=ValidatingPrinter" rel="nofollow">?</a>(validator));
+<p></p>
+		validator.setExpected("Fizz");
+		new Fizz().accept(visitor);
+		if(validator.getFailed()) return "Failed on Fizz";
+<p></p>
+		validator.setExpected("Buzz");
+		new Buzz().accept(visitor);
+		if(validator.getFailed()) return "Failed on Buzz";
+<p></p>
+		validator.setExpected("<a href="wiki?FizzBuzz">FizzBuzz</a>");
+		new <a href="wiki?FizzBuzz">FizzBuzz</a>().accept(visitor);
+		if(validator.getFailed()) return "Failed on <a href="wiki?FizzBuzz">FizzBuzz</a>";
+<p></p>
+		validator.setExpected("1");
+		new Num(1).accept(visitor);
+		if(validator.getFailed()) return "Failed on Num";
+<p></p>
+		return null;
+		}
+	};
+<p></p>
+	new Test("alltogethernow") {
+		public String run() {
+		Validator validator = new Validator();
+		FizzBuzzVisitor<a href="wiki?edit=FizzBuzzVisitor" rel="nofollow">?</a> visitor = new FizzBuzzPrintVisitor<a href="wiki?edit=FizzBuzzPrintVisitor" rel="nofollow">?</a>(new ValidatingPrinter<a href="wiki?edit=ValidatingPrinter" rel="nofollow">?</a>(validator));
+<p></p>
+		validator.setExpected("1");
+		FizzBuzzFactory<a href="wiki?edit=FizzBuzzFactory" rel="nofollow">?</a>.create(1).accept(visitor);
+ 		if(validator.getFailed()) return "Failed on Num";
+<p></p>
+ 		validator.setExpected("Fizz");
+ 		FizzBuzzFactory<a href="wiki?edit=FizzBuzzFactory" rel="nofollow">?</a>.create(3).accept(visitor);
+ 		if(validator.getFailed()) return "Failed on Fizz";
+<p></p>
+ 		validator.setExpected("Buzz");
+ 		FizzBuzzFactory<a href="wiki?edit=FizzBuzzFactory" rel="nofollow">?</a>.create(5).accept(visitor);
+ 		if(validator.getFailed()) return "Failed on Buzz";
+<p></p>
+ 		validator.setExpected("<a href="wiki?FizzBuzz">FizzBuzz</a>");
+ 		FizzBuzzFactory<a href="wiki?edit=FizzBuzzFactory" rel="nofollow">?</a>.create(15).accept(visitor);
+ 		if(validator.getFailed()) return "Failed on <a href="wiki?FizzBuzz">FizzBuzz</a>";
+<p></p>
+ 	 	return null;
+ 		} 
+	};
+	}
+ } 
+<p></p>
+</pre>
+<hr>
+MySQL Select fizzbuzz solution:
+<p></p>
+<pre>	SELECT 
+	CASE 
+		WHEN MOD(a.i + b.i * 10 + 1, 3) = 0 AND MOD(a.i + b.i * 10 + 1, 5) = 0 THEN 'Fizz Buzz'
+		WHEN MOD(a.i + b.i * 10 + 1, 3) = 0 THEN 'Fizz'
+		WHEN MOD(a.i + b.i * 10 + 1, 5) = 0 THEN 'Buzz'
+		ELSE a.i + b.i * 10 + 1 
+	END AS <a href="wiki?FizzBuzz">FizzBuzz</a>
+	FROM (SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) a,
+	(SELECT 0 AS i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) b
+	ORDER BY a.i + b.i * 10 + 1
+<p></p>
+</pre>
+Note MySQL allows sorting by a field that isn't selected, hence this works. Some flavours of SQL will only allow you to sort by a column in the SELECT and for these you would have to bring back 2 columns which wouldn't comply with the requirements of the <a href="wiki?FizzBuzz">FizzBuzz</a> test
+<p></p>
+<hr>
+Visual <a href="wiki?FoxPro">FoxPro</a> <a href="wiki?FizzBuzz">FizzBuzz</a> solution (convert all the bullet points below to asterisks):
+<p></p>
+<ul>
+<li> Program: <a href="wiki?FizzBuzz">FizzBuzz</a>.Prg
+<p></p>
+</li><li> 1. Print out numbers from 1 to 100
+</li><li> 2. If number is divisible by 3, print 'Fizz' in lieu of the number
+</li><li> 3. If number is divisible by 5, print 'Buzz' in lieu of the number
+</li><li> 4. If number is divisible by both 3 and 5, print '<a href="wiki?FizzBuzz">FizzBuzz</a>' in lieu of the number
+<p></p>
+</li></ul><pre>	ACTIVATE SCREEN
+<p></p>
+	LOCAL lnNumber
+	FOR lnNumber = 1 TO 100
+			DO CASE
+			CASE ((m.lnNumber % 3) = 0) AND ((m.lnNumber % 5) = 0)
+			 ? '<a href="wiki?FizzBuzz">FizzBuzz</a>'
+<p></p>
+			CASE (m.lnNumber % 3) = 0
+			 ? 'Fizz'
+<p></p>
+			CASE (m.lnNumber % 5) = 0
+			 ? 'Buzz'
+<p></p>
+			OTHERWISE
+			 ? m.lnNumber
+		ENDCASE
+	ENDFOR
+</pre>
+<hr>
+Python 3 Solution (could be more readable, but I wanted to keep it tiny):
+<p></p>
+<pre>	for x in range(1,101):
+	s = ''
+	if not x % 3:
+		s += 'fizz'
+	if not x % 5:
+		s += 'buzz'
+	if not s:
+		s = x
+	print(s)
+</pre>
+<hr>
+C# one-liner, for clarity rather than clever
+<p></p>
+<pre>	static void Main(string[] args)
+	{
+		for (int i = 1; i &lt;= 100; i++) Console.WriteLine<a href="wiki?edit=WriteLine" rel="nofollow">?</a>("{0}{1}{2}", i % 3 == 0 ? "Fizz" : string.Empty, i % 5 == 0 ? "Buzz" : string.Empty, (i % 3 != 0 &amp;&amp; i % 5 != 0) ? i.ToString<a href="wiki?edit=ToString" rel="nofollow">?</a>() : string.Empty);
+	}
+</pre>
+<hr>
+Another <a href="wiki?JavaScript">JavaScript</a> 1-line solution
+var i=0;while(i&lt;100)i++,console.log([i,'fizz','buzz','fizzbuzz'][(i%3==0)+2*(i%5==0)]);
+<hr>
+I could argue that the best solution would be on the form:
+console.writeline("1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, Fizz, 14, Fizz Buzz, 16, 17, Fizz, 19, Buzz, Fizz, 22, Fizz, Fizz, Buzz, 26, Fizz, 28, 29, Fizz Buzz, Fizz, Fizz, Fizz Fizz, Fizz, Fizz Buzz, Fizz, Fizz, Fizz, Fizz, Buzz, 41, Fizz, Fizz, 44, Fizz Buzz,...");
+All other developers/programmers are just overcomplicating things. :D
+<p></p>
+<hr>
+TCL solution - not very compact as I prefer clarity over brevity and like to make code as explicit as possible.
+<p></p>
+for {set i 1} {$i&lt;101} {incr i} {
+<pre>  if {[expr $i % 15] == 0} {
+	puts "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+  } elseif {[expr $i % 3] == 0} {
+	puts "Fizz"
+  } elseif {[expr $i % 5] == 0} {
+	puts "Buzz"
+  } else {
+	puts $i
+  }
+</pre>
+}
+<p></p>
+<hr>
+C# - LINQ one-liner version:
+<p></p>
+<pre>	foreach (var s in Enumerable.Range(1, 100).Select(i =&gt; (i % 15) == 0 ? "<a href="wiki?FizzBuzz">FizzBuzz</a>" : (i % 5) == 0 ? "Buzz" : (i % 3) == 0 ? "Fizz" : i.ToString<a href="wiki?edit=ToString" rel="nofollow">?</a>())) { Console.WriteLine<a href="wiki?edit=WriteLine" rel="nofollow">?</a>(s); }
+<p></p>
+<p></p>
+<p></p>
+</pre>
+<hr>
+<a href="wiki?LiveCode">LiveCode</a> — a cross-compiler for Windows, Mac OSX, iOS, Android, et.al. with highly readable code: 
+<p></p>
+<pre>	repeat with theNumber = 1 to 100
+	if theNumber mod 3 &lt;&gt; 0 and theNumber mod 5 &lt;&gt; 0 then put theNumber after field "textField" 
+	if theNumber mod 3 = 0 then put "Fizz" after field "textField"
+	if theNumber mod 5 = 0 then put "Buzz" after field "textField"
+	put return after field "textField"
+	end repeat
+<p></p>
+<p></p>
+</pre>
+Here's an alternative using mod 15 and switch: 
+<p></p>
+repeat with theNumber = 1 to 100
+<pre>	switch 0  -- searches for a modulus of zero
+	case theNumber mod 15
+	 put "<a href="wiki?FizzBuzz">FizzBuzz</a>" after field "textField" break
+	case theNumber mod 3
+	 put "Fizz" after field "textField" break
+	case theNumber mod 5
+	 put "Buzz" after field "textField" break
+	default
+	 put theNumber after field "textField"
+	end switch
+	put return after field "textField"
+</pre>
+end repeat
+<p></p>
+—mellington
+<p></p>
+<hr>
+<p></p>
+PHP again:
+<pre>	function f(){for($i=1;$i&lt;101;++$i){echo(($a=($i%3?"":'Fizz').($i%5?"":'Buzz'))?$a:$i).PHP_EOL;}}
+<p></p>
+</pre>
+<hr>
+<p></p>
+Python again, but with a Lambda! *gasp*:
+<p></p>
+for i in range(1,101):
+<pre>	x = lambda z: False if i % z else True
+	if(x(3) and x(5)): print "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+	if(x(3)): print "Fizz"
+	elif(x(5)): print "Buzz"
+	else: print i
+<p></p>
+<p></p>
+</pre>
+<hr>
+The first thing that came to my mind is using a bitmask. 01 maps to fizz, 10 maps to buzz, 11 maps to fizzbuzz and 00 maps to everything else.
+Here it is in powershell:
+<p></p>
+function fizzbuzz(){
+<pre> for ($i=1; $i -lt 101; $i++){
+  $db=0;
+	if ($i%3 -eq 0){$db = $db -bor 1} 
+	if ($i%5 -eq 0){$db = $db -bor 2} 
+<p></p>
+	switch($db)
+	{
+</pre><ol>
+<li> { Write-Output "Fizz"} #01
+</li><li> { Write-Output "Buzz"} #10
+</li><li> { Write-Output "<a href="wiki?FizzBuzz">FizzBuzz</a>"} #11
+</li></ol><pre>	default {Write-Output $i} #00
+	}
+  }
+ } 
+<p></p>
+</pre>
+<hr>
+This one  is nice because you're just counting up, no dividing necessary.
+<p></p>
+<pre>	function fizzbuzz2(){
+	$a = 1..101 | % {""}
+	for ($i=3; $i -le 100; $i +=3){$a[$i]="Fizz"}
+	for ($i=5; $i -le 100; $i +=5){$a[$i]+="Buzz"}
+	for ($i=1; $i -le 100; $i++){if ($a[$i] -eq ""){$a[$i]=$i}}
+	return $a
+	}
+<p></p>
+</pre>
+And the equivalent in c.
+<p></p>
+<pre>	#include &lt;stdio.h&gt;
+	#include &lt;string.h&gt;
+	void main()
+	{
+	char a[101][9];
+	memset (a,'\0',sizeof(char)*9*101);
+	int i=0;
+	for (i=3; i&lt;101; i+=3){strcpy(a[i],"fizz");}
+	for (i=5; i&lt;101; i+=5){strcat(a[i],"buzz");}
+	for (i=1; i&lt;101; i++){ (strcmp(a[i],"")==0) ? printf("%d\n",i): printf("%s\n",a[i]);}
+	return;
+	}
+<p></p>
+</pre>
+<hr>
+<p></p>
+Most readable C version I've managed so far, skipping #include boilerplate:
+<p></p>
+void fizzbuzz(void) {
+<pre>	char buffer[4];
+	for (int i = 1; i &lt;= 100; i++) {
+		snprintf(buffer, 4, "%i", i);
+		printf("%s%s%s\n",
+		(i % 3) ? "" : "fizz",
+		(i % 5) ? "" : "buzz",
+		((i % 3) || (i % 5)) ? buffer : "");
+	}
+</pre>
+}
+<p></p>
+<hr>
+<p></p>
+I'd skip the mod 15 altogether, here is an VB.NET example:
+<p></p>
+For i As Integer = 1 To 100
+<p></p>
+<pre>	Dim _line As New System.Text.<a href="wiki?StringBuilder">StringBuilder</a>()
+<p></p>
+	_line.Append(i.ToString<a href="wiki?edit=ToString" rel="nofollow">?</a> &amp; vbTab)
+<p></p>
+	If (i / 3) = Int(i / 3) Then _
+	_line.Append("Fizz")
+<p></p>
+	If (i / 5) = Int(i / 5) Then _
+	_line.Append("Buzz")
+<p></p>
+	Console.WriteLine<a href="wiki?edit=WriteLine" rel="nofollow">?</a>(_line)
+<p></p>
+</pre>
+Next
+<p></p>
+jmrjr1 + test.getName());
+<pre>		System.err.println(Buzz, 
+<p></p>
+</pre>
+<hr>
+Perl snippet..
+{
+<pre>	my $i;
+	for ($i = 1; $i &lt;= 100; $i++)
+	{
+	my $str1 = $i;
+	my $str2;
+	my $str3;
+<p></p>
+	if ($i % 3 == 0)
+	{
+		$str1 = "";
+		$str2 = "Fizz";
+	}
+	if ($i % 5 == 0)
+	{
+		$str1 = "";
+		$str3 = "Buzz";
+	}
+	print ("$str1$str2$str3\n");
+	}
+</pre>
+}
+<p></p>
+<hr>
+SQL Server, SELECT query (with recursive CTE):
+<p></p>
+<pre> WITH CTE
+ AS
+ (
+	SELECT 1 AS num,
+</pre><ol>
+<li> AS mod3,
+</li><li> AS mod5
+<p></p>
+</li></ol><pre>	UNION ALL
+<p></p>
+	SELECT num + 1,
+	(num + 1) % 3,
+	(num + 1) % 5
+	FROM CTE
+	WHERE num &lt; 100
+ )
+ SELECT num,
+	CASE WHEN mod3 + mod5 = 0 THEN '<a href="wiki?FizzBuzz">FizzBuzz</a>'
+	WHEN mod5 = 0 THEN 'Buzz'
+	WHEN mod3 = 0 THEN 'Fizz'
+	ELSE CAST(num AS VARCHAR(10))
+	END
+ FROM CTE;
+<p></p>
+</pre>
+And here's a SQL Server-specific version using subquery instead:
+<p></p>
+<pre> SELECT num,
+	CASE WHEN mod3 + mod5 = 0 THEN '<a href="wiki?FizzBuzz">FizzBuzz</a>'
+	WHEN mod5 = 0 THEN 'Buzz'
+	WHEN mod3 = 0 THEN 'Fizz'
+	ELSE CAST(num AS VARCHAR(10))
+	END
+ FROM 
+ (
+	SELECT number as num,
+	number % 3 AS mod3,
+	number % 5 AS mod5
+	FROM master.dbo.spt_values
+	WHERE name IS NULL
+	AND number BETWEEN 1 AND 100
+ ) AS numbers;
+<p></p>
+</pre>
+<hr>
+More C solutions that no one would ever use on a code test! If you used the first one and explained it you will probably get hired no further questions asked lol.
+<p></p>
+void fizzbuzzHack()
+{
+<pre>	char b;
+	intbuzzfizz i;
+	, i );
+		else 
+			 cout printf(for (i = 1; i &lt; 101; i++)
+	{
+	b = 1;
+	b &amp;= i % 3 ? 1 : printf("Fizz");
+	b &amp;= i % 3 ? 1 : printf("Buzz");
+	b ? printf("%d", i) : printf("\n");
+	/* This works by noticing 1 &amp; 4 (# of characters printed for "Fizz" or "Buzz") = 0 if you are wondering. Obviously 1 &amp; 1 = 1 and 0 &amp; anything = 0.
+		Work out the test cases and you will see the rest. You can use 1 in the bitwise and with the printf for any string that has even # characters since
+		you are guaranteed to have a binary representation with a 0 on the least significant bit. */
+	}
+</pre>
+}
+<p></p>
+More accurate solution:
+<p></p>
+#include &lt;stdio.h&gt;
+int main()
+{
+<pre>	int i;
+	char b;
+	for (i = 1; i &lt; 101; i++)
+	{
+	b = i % 3 ? 1 : 0 &amp; printf("Fizz"); /* b gets 1 if !divisible by 3. gets 0 if divisible by 3 */
+	b = (i % 5 ? 1 : 0 &amp; printf("Buzz")) &amp;&amp; b; /* same as above with 5 + logical and with above result. order matters.  b = ... &amp;&amp; b can be replaced with b &amp;= ... of course */
+	b ? printf("%d\n", i) : printf("\n"); /* print number &amp; newline if !divisible by 3 or 5. print new line otherwise. */
+	}
+	return 0;
+</pre>
+}
+-JD
+<p></p>
+<p></p>
+<hr>
+Compact solution in python that doesn't repeat tests:
+<p></p>
+<pre>	for i in range(1, 101):
+		fizz = (i%3 == 0) * "fizz"
+		buzz = (i%5 == 0) * "buzz"
+		if fizz or buzz:
+			print(fizz + buzz)
+		else:
+			print(i)
+<p></p>
+</pre>
+Not as majestic as some of the leviathan one-liner solutions I've seen above, but perhaps more readable.
+<p></p>
+- Dion Bridger
+<hr>
+Re: Dion Bridger
+My simple python solution is nearly identical to yours, just a little more compact: 
+<p></p>
+<pre>    for n in range(1,101):
+	fizzbuzz = (not n%3) * "Fizz" + (not n%5) * "Buzz"
+	print(fizzbuzz if fizzbuzz else n)
+<p></p>
+</pre>
+-A.Kanyer
+<p></p>
+<hr>
+Branchless Java version:
+<p></p>
+<pre>	for (int i=1;i&lt;=100;i++) {
+		int a=((528&gt;&gt;i%15-1)&amp;1)*4;
+		int b=((-2128340926&gt;&gt;(i%15)*2)&amp;3)*4;
+		System.out.println("<a href="wiki?FizzBuzz">FizzBuzz</a>".substring(a,b)+(a==b?i:""));
+	}
+<p></p>
+</pre>
+- Riven
+<p></p>
+<hr>
+<p></p>
+Took 1'30" to open editor, code, compile, and run:
+<pre> #include &lt;stdio.h&gt;
+ int main(void) {
+	int i;
+	for (i = 1; i &lt;= 100; i++) {
+		if (i % 3 &amp;&amp; i % 5) printf("%d", i);
+		if (i % 3 == 0) printf("Fizz");
+		if (i % 5 == 0) printf("Buzz");
+		printf("\n");
+	}
+	return 0;
+ }
+</pre>
+Now, can I have a job?
+<p></p>
+<em>Nope, not if takes you that long.  Come back when you're under a minute in 6502 assembly language.</em>
+<p></p>
+<p></p>
+<hr>
+<p></p>
+Wrote directly from beginning to end, ended up with slightly convoluted conditional logic.
+<p></p>
+<pre> int main (void)
+ {
+	int i;
+	for (i = 1; i &lt;= 100; i++) {
+		if (!((i % 5) * (i % 3))) {
+			if(!(i % 3))
+				printf("fizz");
+			if(!(i % 5))
+				printf("buzz");
+		}
+		else
+			printf("%d", i);
+		printf("\n");
+	}
+	return 0;
+ }
+<p></p>
+</pre>
+<hr>
+<p></p>
+Here is a SWI-Prolog version:
+<p></p>
+<pre>	fizzbuzz :- fizzbuzz(1, 100).
+<p></p>
+	fizzbuzz(N, Max) :-
+		N =&lt; Max, !,
+		findall(W, word(W, N), Ws),
+		show(Ws, N),
+		N1 is N + 1,
+		fizzbuzz(N1, Max).
+<p></p>
+	word(fizz, N) :- divisible(N, 3).
+	word(buzz, N) :- divisible(N, 5).
+<p></p>
+	divisible(N, D) :-
+		X is N mod D,
+		X = 0.
+<p></p>
+	show([], N) :- writeln(N), !.
+	show(Ws, _) :- atomic_list_concat(Ws, S), writeln(S).
+<p></p>
+</pre>
+Or, we could go crazy and define our own little mini-language:
+<p></p>
+<pre>	?- op(300, xfx, for).
+	?- op(300, fy, find).
+	?- op(300, fy, show).
+	?- op(300, fy, use).
+	?- op(300, xfy, from).
+	?- op(300, xfy, to).
+	?- op(300, xfy, divides).
+	?- op(300, fy, writeln).
+	?- op(300, xfy, atomic_list_concat).
+<p></p>
+<p></p>
+	fizzbuzz :- fizzbuzz from 1 to 100.
+<p></p>
+	fizzbuzz from Number to Max :-
+		Number =&lt; Max, !,
+		find Words for Number,
+		show Words for Number,
+		Next is Number + 1,
+		fizzbuzz from Next to Max.
+<p></p>
+	find Words for Number :-
+		findall(Word, use Word for Number, Words).
+<p></p>
+	show [] for Number :- writeln Number, !.
+	show Words for _ :- Words atomic_list_concat String, writeln String.
+<p></p>
+	use fizz for Number :- 3 divides Number.
+	use buzz for Number :- 5 divides Number.
+<p></p>
+	Divider divides Number :-
+		Remainder is Number mod Divider,
+		Remainder = 0.
+<p></p>
+</pre>
+- Mick Krippendorf
+<p></p>
+<hr>
+<p></p>
+Attempted this in JCreator a few minutes ago. I tried to make it easy-to-read, so feedback would be appreciated.
+<p></p>
+<pre>	import java.util.*;
+	public class <a href="wiki?FizzBuzz">FizzBuzz</a>
+	{
+		public static void main (String [] args)
+		{
+			int n=1;
+			while (n&lt;=100)
+			{if (n%3==0 &amp;&amp; n%5==0)
+				System.out.printf ("<a href="wiki?FizzBuzz">FizzBuzz</a>\n");
+			else if (n%3==0)
+				System.out.printf ("Fizz\n");
+			else if (n%5==0)
+				System.out.printf ("Buzz\n");
+			else System.out.printf ("%d\n", n);
+				n++;}
+		}
+	}
+<p></p>
+</pre>
+-Adi
+<p></p>
+<hr>
+<p></p>
+I see 2 things that make troubles here.
+1. there are 2 bits (is it multiple of 3 and is it multiple of 5) and 4 outputs. This is perfect balance. But if we use conditional statement with 2 branches (like IF), then 3 statements are required to build a tree with 4 leaves. This 3rd condition confuses.
+A way to avoid this is by using bits and arrays:
+<p></p>
+<pre>	var a = [false, "Fizz", "Buzz", "<a href="wiki?FizzBuzz">FizzBuzz</a>"];
+	for (var i=1; i&lt;101; i++) {
+		var bit0 = !(i%3);
+		var bit1 = !(i%5);
+		var index = (bit1 &lt;&lt; 1) | bit0;
+		console.log(a[index] || i);
+	}
+</pre>
+Or shorter version:
+<p></p>
+<pre>	for (var i=1; i&lt;101; i++) 
+		console.log(a[(!(i%5) &lt;&lt; 1) | !(i%3)] || i);
+<p></p>
+</pre>
+2. we've got repeated strings here so optimization thirst makes us to use Fizz and Buzz only once.
+<p></p>
+<pre>	for (var i=1; i&lt;101; i++) {
+		console.log(((i%3?"":"Fizz") + (i%5?"":"Buzz")) || i )
+	}?
+</pre>
+-Dan
+<hr>
+What? No Pascal yet? This runs in Freepascal, Delphi and probably more pascilators.
+<p></p>
+<pre> //skipped headers, uses clause and stuff
+ var b:byte;
+ begin
+	for b:=1 to 100 do
+	begin
+	if (b mod 15)=0 then writeln('fizzbuzz')
+	else if (b mod 5)=0 then writeln('buzz')
+	else if (b mod 3)=0 then writeln('fizz')
+	else writeln(IntToStr<a href="wiki?edit=IntToStr" rel="nofollow">?</a>(b));
+	end;
+ end;
+<p></p>
+</pre>
+-Nicolai
+<hr>
+Here is an attempt with only function calls (in c, mostly stolen and thrown together):
+<p></p>
+<pre> #include &lt;stdio.h&gt;
+<p></p>
+ //This looks familiar!
+ const char *s[]={
+  "%d", "%d", "Fizz", "%d", "Buzz", "Fizz", "%d", "%d",
+  "Fizz", "Buzz", "%d", "Fizz", "%d", "%d", "<a href="wiki?FizzBuzz">FizzBuzz</a>"
+ };
+<p></p>
+ int last(int i) {
+  return 0;
+ }
+<p></p>
+ int main(int i) {
+  printf(s[i%15],i+1);
+  printf("\n");
+  //either main+0=main or main+(last-main)=last
+  return (&amp;main + (&amp;last - &amp;main)*(i/99))(i+1);
+ }
+<p></p>
+</pre>
+- Eric
+<p></p>
+Minimalist Java Solution
+<p></p>
+<p></p>
+<pre> int output = 0;
+ for(int i=0; i&lt;100; i++)
+</pre>
+{
+<pre>	output = i;
+	if(output % 3 == 0){
+	system.println.out("fizz");
+	output = null;}
+	if(output % 5 == 0){
+	system.println.out("buzz");
+	output = null;}
+	system.println.out(output)
+</pre>
+}
+<p></p>
+Guillaume Tousignant 10/12/2013
+<hr>
+Most beautiful code ever written in shakespeare
+<p></p>
+Romeo, a handsome count
+Juliet, an angry woman
+Hamlet, a letter holder
+Othelio, three
+Mercutio, five
+<p></p>
+Act I: The counting of Romeo and the praising of Hamlet by Juliet
+<pre>	Scene I: The prologue of the Counting
+	[Enter Juliet and Romeo]
+	Juliet: You are nothing!
+	[Exit Romeo]
+	[Enter Hamlet]
+	Juliet: You are nothing!
+	[Enter Othelio]
+	Juliet: You are a warm summer's day!
+	Juliet: You are the sum of youself and a flower!
+	[Exit Othelio]
+	[Enter Mercutio]
+	Juliet: You are a happy bouncing bunny!
+	Juliet: You are the sum of yourself and a tree!
+	[Exeunt Juliet, Mercutio]
+<p></p>
+	Scene II: Where the <a href="wiki?FizzBuzz">FizzBuzz</a> is calculated
+	[Enter Romeo and Juliet]
+	Juliet: You are the sum of yourself and a flower!
+	Juliet: Art thou greater than the sum of the difference between a tall yellow happy smiling smelly shifty bouncing rabbit and a angry sad malelovent indifferent small beggar and a happy tall stranger?
+	Romeo: If so, let us proceed to Scene VIII.
+<p></p>
+	Scene III: Where fizz is checked for
+	Juliet: Art the remainder of the quotient of yourself the same as Othelio?
+	Romeo: If so, let us proceed to Scene VI.
+<p></p>
+	Scene IV: Whence buzz is interrogated
+	Juliet: Art the remainder of the quotient of yourself the same as Mercutio?
+	Romeo: If so, let us proceed to Scene VII
+<p></p>
+	Scene V: Where a new line is created
+	[Enter Juliet and Hamlet]
+		Juliet: You are nothing!
+		Juliet: You are as amazing as a godly flying silver happy UFO
+			You are as happy as the difference of yourself and a rich banana stand
+			You are as tall as the difference of yourself and godzilla
+			Speak your mind!
+	Hamlet: Let us proceed to Scene II
+<p></p>
+<p></p>
+	Scene VI: The saying of Fizz
+	[Enter Juliet and Hamlet]
+	Juliet: You are nothing!
+	Juliet: You are as good as the sum of a small little happy colorful pretty nice flower and a happy small pretty tree.
+		You are as good as the difference of yourself and a happy child.
+		Speak your mind!
+	Juliet: You are as good as the sum of yourself and a amazing super walnut.
+		You are as good as the difference of yourself and a banana.
+		Speak your mind!
+	Juliet: You are as amazing as the sum of yourself and a smiling tall flying happy balloon.
+		You are as godly as the sum of yourself and a happy estastic chipmunk.
+		Speak your mind!
+		Speak your mind!
+	Hamlet: Let us proceed to Scene IV
+<p></p>
+	Scene VII: Where the buzz is said
+	[Enter Juliet and Hamlet]
+	Juliet: You are nothing!
+	Juliet: You are as tall as a indignant happy smiling yellow tall flying squirrel!
+		You are as brave as the sum of yourself and a frenchman!
+		Speak your mind!
+	Juliet: You are as happy as the sum of yourself and a tall yellow scary sad bigfoot.
+		You are as powerful as the sum of yourself and a short merry hobbit.
+		You are as silly as the difference of yourself and a rabbit.
+		Speak your mind!
+	Juliet: You are as tall as the sum of yourself and a tall silly monster!
+		You are as amazing as the sum of yourself and God!
+		Speak your mind!
+		Speak your mind!
+	Hamlet: Let us proceed to Scene V
+<p></p>
+	Scene VIII: The End
+	Juliet: I hate you all
+	[Exuent]
+</pre>
+<hr>
+Yet another simple perl implementation, uncomment the one commented line for the woof on 7
+<p></p>
+for (1..100)
+{
+<pre>	$out = ($_%3 == 0) ? "Fizz" : "";
+	$out .= ($_%5 == 0) ? "Buzz" : "";
+	#$out .= ($_%7 == 0) ? "Woof" : "";
+	$out = ($out eq "") ? $_ : $out;
+	print "$out \n";
+</pre>
+}
+<hr>
+<p></p>
+Php implementation
+<p></p>
+for($n=1; $n&lt;101; $n++){
+<pre>	echo ($n%3==0 &amp;&amp; $n%5==0 ? '<a href="wiki?FizzBuzz">FizzBuzz</a> ' : ($n%5==0 ? "buzz ": ($n%3==0 ?"fizz ":$n." ")));
+</pre>
+}
+<p></p>
+<hr>
+<p></p>
+Yet another Java implementation. 
+Nothing unique here... but this exact method has not already been done above.
+<p></p>
+public class <a href="wiki?FizzBuzz">FizzBuzz</a>{ 
+<pre>	public static void main(String [] args){
+<p></p>
+		for(int i=1; i&lt;101; i++){
+<p></p>
+			if(i%15==0){
+				System.out.println("<a href="wiki?FizzBuzz">FizzBuzz</a>");
+			}
+			else if(i%3==0){
+				System.out.println("Fizz");
+			}
+			else if(i%5==0){
+				System.out.println("Buzz");
+			}
+			else{
+				System.out.println(i);
+			}
+		}
+	}
+</pre>
+}
+<p></p>
+<hr>
+How about an Objective C version?
+Just started to code in it and it seemed fun.
+<p></p>
+int i = 100;
+int multiplier = 0;
+NSMutableArray *newArray = [NSMutableArray arrayWithObjects: @1, @2, @"Fizz", @4, @"Bang", @"Fizz", @7, @8, @"Fizz", @"Bang", @11, @"Fizz", @13, @14, @"FizzBang<a href="wiki?edit=FizzBang" rel="nofollow">?</a>", nil];
+<p></p>
+for(int j = 1; j&lt;=i; j++){
+<pre>	if([[newArray  objectAtIndex:j-1] isKindOfClass:[NSString class]] ){
+		NSLog(@"%@", [newArray  objectAtIndex:j-1]);
+	}
+	else{
+		NSLog(@"%d", [[newArray  objectAtIndex:j-1] intValue]+multiplier);
+	}
+<p></p>
+	if(j%15 == 0){
+		j -= 15;
+		i -= 15;
+		multiplier += 15;
+	}
+</pre>
+}
+<p></p>
+<hr>
+C++ - Fast as possible
+<p></p>
+#include &lt;iostream&gt;  
+#include &lt;string&gt;
+<p></p>
+int main()    
+{
+<pre>	std::string str = "";
+	for (int i = 1; i &lt; 101; ++i)
+	{
+		if (i % 15 == 0)
+			str = "<a href="wiki?FizzBuzz">FizzBuzz</a>";
+		else
+		{
+			if (i % 3 == 0)
+				str = "Fizz";
+			else if (i % 5 == 0)
+				str = "Buzz";
+			else
+				str = std::to_string(i);
+		}
+		std::cout &lt;&lt; i &lt;&lt; ". " &lt;&lt; str &lt;&lt; std::endl;
+	}
+	std::cin.get();
+	return 0;
+</pre>
+}
+<p></p>
+Martin "Sunny" Švandelík
+</div>
+
+<hr>
+<a href="wiki?edit=FizzBuzzTest" rel="nofollow"><img src="/wiki.png" style="border: none;"> EditText</a> of this page
+(last edited <a href="quickDiff?FizzBuzzTest" rel="nofollow">February 6, 2014</a>)
+or <a href="wiki?FindPage">FindPage</a> with title or text search<br>
+<link rel="alternate" type="application/wiki" title="Edit this page!" href="wiki?edit=FizzBuzzTest">
+<link rel="edit" title="Edit this page" href="wiki?edit=FizzBuzzTest">
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-2377314-2";
+_udn="c2.com"; 
+urchinTracker();
+</script>
+
+
+</body></html>
+

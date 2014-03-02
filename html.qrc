@@ -1,0 +1,120 @@
+<RCC>
+    <qresource prefix="/TradingPost">
+        <file>html/TradingPost/.classpath.txt</file>
+        <file>html/TradingPost/.project.txt</file>
+        <file>html/TradingPost/Bukkit Plugin Test (1).launch.txt</file>
+        <file>html/TradingPost/config.yml.txt</file>
+        <file>html/TradingPost/data.yml.txt</file>
+        <file>html/TradingPost/plugin.yml.txt</file>
+        <file>html/TradingPost/TradingPost.eml.txt</file>
+        <file>html/TradingPost/TradingPost.iml.txt</file>
+        <file>html/TradingPost/users.yml.txt</file>
+    </qresource>
+    <qresource prefix="/AccessFlashDrive">
+        <file>html/AccessFlashDrive/AccessFlashDrive.cbp.txt</file>
+        <file>html/AccessFlashDrive/AccessFlashDrive.depend.txt</file>
+        <file>html/AccessFlashDrive/AccessFlashDrive.layout.txt</file>
+        <file>html/AccessFlashDrive/source.cpp.txt</file>
+    </qresource>
+    <qresource prefix="/FizzBuzz">
+        <file>html/FizzBuzz/FizzBuzz.cbp.txt</file>
+        <file>html/FizzBuzz/FizzBuzz.depend.txt</file>
+        <file>html/FizzBuzz/FizzBuzz.layout.txt</file>
+        <file>html/FizzBuzz/main.cpp.txt</file>
+    </qresource>
+    <qresource prefix="/MCUHelper">
+        <file>html/MCUHelper/MinecraftUpdates.sln.txt</file>
+        <file>html/MCUHelper/readme.txt</file>
+    </qresource>
+    <qresource prefix="/html">
+        <file>html/AccessFlashDrive.html</file>
+        <file>html/FizzBuzz.html</file>
+        <file>html/index.html</file>
+        <file>html/MCUHelper.html</file>
+        <file>html/TradingPost.html</file>
+        <file>html/FizzBuzzInfo.html</file>
+        <file>html/wiki.gif</file>
+        <file>html/gpl-2.0.html</file>
+        <file>html/lgpl-2.1.html</file>
+        <file>html/license.html</file>
+        <file>html/credits.html</file>
+        <file>html/credits_es.html</file>
+        <file>html/credits_fr.html</file>
+    </qresource>
+    <qresource prefix="/TradingPost/.idea">
+        <file>html/TradingPost/.idea/index.html</file>
+        <file>html/TradingPost/.idea/.name.txt</file>
+        <file>html/TradingPost/.idea/codeStyleSettings.xml.txt</file>
+        <file>html/TradingPost/.idea/compiler.xml.txt</file>
+        <file>html/TradingPost/.idea/encodings.xml.txt</file>
+        <file>html/TradingPost/.idea/misc.xml.txt</file>
+        <file>html/TradingPost/.idea/modules.xml.txt</file>
+        <file>html/TradingPost/.idea/uiDesigner.xml.txt</file>
+        <file>html/TradingPost/.idea/vcs.xml.txt</file>
+        <file>html/TradingPost/.idea/workspace.xml.txt</file>
+    </qresource>
+    <qresource prefix="/TradingPost/.idea/artifacts">
+        <file>html/TradingPost/.idea/artifacts/index.html</file>
+        <file>html/TradingPost/.idea/artifacts/TradingPost_jar.xml.txt</file>
+    </qresource>
+    <qresource prefix="/TradingPost/.idea/copyright">
+        <file>html/TradingPost/.idea/copyright/index.html</file>
+        <file>html/TradingPost/.idea/copyright/profiles_settings.xml.txt</file>
+    </qresource>
+    <qresource prefix="/TradingPost/.idea/scopes">
+        <file>html/TradingPost/.idea/scopes/index.html</file>
+        <file>html/TradingPost/.idea/scopes/scope_settings.xml.txt</file>
+    </qresource>
+    <qresource prefix="/TradingPost/.settings">
+        <file>html/TradingPost/.settings/index.html</file>
+        <file>html/TradingPost/.settings/org.eclipse.jdt.core.prefs.txt</file>
+        <file>html/TradingPost/.settings/org.eclipse.jdt.ui.prefs.txt</file>
+        <file>html/TradingPost/.settings/org.eclipse.ltk.core.refactoring.prefs.txt</file>
+    </qresource>
+    <qresource prefix="/TradingPost/src">
+        <file>html/TradingPost/src/index.html</file>
+    </qresource>
+    <qresource prefix="/TradingPost/src/com">
+        <file>html/TradingPost/src/com/index.html</file>
+    </qresource>
+    <qresource prefix="/TradingPost/src/com/spgrn">
+        <file>html/TradingPost/src/com/spgrn/index.html</file>
+    </qresource>
+    <qresource prefix="/TradingPost/src/com/spgrn/tradingpost">
+        <file>html/TradingPost/src/com/spgrn/tradingpost/index.html</file>
+        <file>html/TradingPost/src/com/spgrn/tradingpost/TradingPost.java.txt</file>
+    </qresource>
+    <qresource prefix="/MCUHelper/_UpgradeReport_Files">
+        <file>html/MCUHelper/_UpgradeReport_Files/index.html</file>
+        <file>html/MCUHelper/_UpgradeReport_Files/UpgradeReport.css.txt</file>
+        <file>html/MCUHelper/_UpgradeReport_Files/UpgradeReport.xslt.txt</file>
+        <file>html/MCUHelper/_UpgradeReport_Files/UpgradeReport_Error.png</file>
+        <file>html/MCUHelper/_UpgradeReport_Files/UpgradeReport_Information.png</file>
+        <file>html/MCUHelper/_UpgradeReport_Files/UpgradeReport_Success.png</file>
+        <file>html/MCUHelper/_UpgradeReport_Files/UpgradeReport_Warning.png</file>
+    </qresource>
+    <qresource prefix="/MCUHelper/MinecraftUpdates">
+        <file>html/MCUHelper/MinecraftUpdates/App.config.txt</file>
+        <file>html/MCUHelper/MinecraftUpdates/Form1.cs.txt</file>
+        <file>html/MCUHelper/MinecraftUpdates/Form1.Designer.cs.txt</file>
+        <file>html/MCUHelper/MinecraftUpdates/Form1.resx.txt</file>
+        <file>html/MCUHelper/MinecraftUpdates/index.html</file>
+        <file>html/MCUHelper/MinecraftUpdates/MinecraftUpdates.csproj.txt</file>
+        <file>html/MCUHelper/MinecraftUpdates/MinecraftUpdates.csproj.user.txt</file>
+        <file>html/MCUHelper/MinecraftUpdates/Program.cs.txt</file>
+        <file>html/MCUHelper/MinecraftUpdates/MCUICON.png</file>
+    </qresource>
+    <qresource prefix="/MCUHelper/MinecraftUpdates/Properties">
+        <file>html/MCUHelper/MinecraftUpdates/Properties/app.manifest.txt</file>
+        <file>html/MCUHelper/MinecraftUpdates/Properties/AssemblyInfo.cs.txt</file>
+        <file>html/MCUHelper/MinecraftUpdates/Properties/index.html</file>
+        <file>html/MCUHelper/MinecraftUpdates/Properties/Resources.Designer.cs.txt</file>
+        <file>html/MCUHelper/MinecraftUpdates/Properties/Resources.resx.txt</file>
+        <file>html/MCUHelper/MinecraftUpdates/Properties/Settings.Designer.cs.txt</file>
+        <file>html/MCUHelper/MinecraftUpdates/Properties/Settings.settings.txt</file>
+    </qresource>
+    <qresource prefix="/MCUHelper/MinecraftUpdates/Resources">
+        <file>html/MCUHelper/MinecraftUpdates/Resources/index.html</file>
+        <file>html/MCUHelper/MinecraftUpdates/Resources/MCU.gif</file>
+    </qresource>
+</RCC>

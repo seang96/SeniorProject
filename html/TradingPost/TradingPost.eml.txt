@@ -1,0 +1,8 @@
+#<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="craftbukkit.jar" scope="COMPILE">
+		<srcroot url="file://$MODULE_DIR$/../Bukkit-Bukkit-f638ec1"/>
+	</lib>
+</component>

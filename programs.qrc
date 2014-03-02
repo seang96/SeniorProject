@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/exe">
+        <file>FizzBuzz.exe</file>
+        <file>setup.exe</file>
+    </qresource>
+</RCC>

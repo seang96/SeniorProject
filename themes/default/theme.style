@@ -1,0 +1,121 @@
+/*Set Program Background*/
+QWidget {
+	background-color: rgb(26, 26, 26);
+}
+
+
+
+/*Styles QtAbout's font (in about dialogue)*/
+QWidget {
+	color: white;
+}
+
+
+/*Set Minimize/Exit Button Color*/
+QPushButton#exit, #minimize {
+	color: rgb(220, 0, 0);
+	border: none;
+	outline: none;
+}
+QPushButton#exit:hover, #minimize:hover {
+	color: rgb(255, 8, 0);
+}
+QPushButton#exit:pressed, #minimize:pressed {
+	color: rgb(150, 0, 0);
+}
+
+
+
+/*Set Language UI Font Color*/
+QGroupBox#groupBox, QRadioButton#English, QRadioButton#French, QRadioButton#Spanish, QGraphicsView {
+	color: red;
+	border: none;
+}
+
+/*Set main labels to red*/
+QFrame#mainbox QLabel {
+	color: red;
+}
+
+/*Main Buttons*/
+QFrame#mainbox QPushButton, QFrame#programs_window QPushButton, QDialog#About QPushButton, QPushButton#Options_3, QPushButton#OK {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(122,188,255,255), stop: 0.44 rgba(96,171,248,255), stop: 1 rgba(64,150,238,255));
+	border: .1px outset rgb(122, 188, 255);
+	border-radius:4px;
+	color: black;
+}
+QFrame#mainbox QPushButton:hover, QFrame#programs_window QPushButton:hover, QDialog#About QPushButton:hover, QPushButton#Options_3:hover, QPushButton#OK:hover {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(147,201,255,255), stop: 0.44 rgba(133,190,247,255), stop: 1 rgba(90,163,237,255));
+}
+QFrame#mainbox QPushButton:pressed, QFrame#programs_window QPushButton:pressed, QDialog#About QPushButton:pressed, QPushButton#Options_3:pressed, QPushButton#OK:pressed {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(84,169,255,255), stop: 0.44 rgba(66,155,244,255), stop: 1 rgba(45,141,237,255));
+}
+
+
+
+/*Set objects that need white backgrounds to white*/
+QWidget#SourceTab, QWidget#info, QWidget#credits, QWidget#license, QWebView, QTextBrowser {
+	background: white;
+	border: none;
+	color: black;
+}
+
+
+
+/*Tab Styling*/
+QTabWidget::tab-bar {
+	left: 5px; /* move to the right by 5px */
+}
+
+QTabBar::tab {
+	color: black;
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(122,188,255,255), stop: 0.44 rgba(96,171,248,255), stop: 1 rgba(64,150,238,255));
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	min-width: 8ex;
+	padding: 2px;
+}
+QTabBar::tab:selected, QTabBar::tab:hover {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(147,201,255,255), stop: 0.44 rgba(133,190,247,255), stop: 1 rgba(90,163,237,255));
+}
+
+QTabBar::tab:selected {
+	border-color: #9B9B9B;
+	border-bottom-color: #C2C7CB;
+}
+
+QTabBar::tab:!selected {
+	margin-top: 2px;
+}
+
+
+
+
+/*Set Forward/Backward Buttons*/
+QWidget#SourceTab QPushButton, QWidget#SourceTab QPushButton:hover, QWidget#SourceTab QPushButton:pressed {
+	border: none;
+	background-color: none;
+}
+
+
+
+/*Options Styling*/
+QFrame#Options QLabel {
+	color: red;
+}
+
+QLabel#Options_2 {
+	font: 75 12pt "Segoe Print";
+}
+
+QFrame#Options QPushButton {
+	background-color: none;
+	border: none;
+	color: red;
+}
+
+QFrame#Options QComboBox {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgba(122,188,255,1), stop: 0.44 rgba(96,171,248,1), stop: 1 rgba(64,150,238,1));
+	border: none;
+	color: black;
+}

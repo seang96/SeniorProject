@@ -1,0 +1,39 @@
+#include <windows.h>
+#include <string>
+#include <iostream>
+
+int main()
+{
+	//Changed values to 0xFF for security.
+    RegisterHotKey(NULL,1,MOD_SHIFT | MOD_CONTROL | MOD_ALT,0xFF);
+    RegisterHotKey(NULL,2,MOD_SHIFT | MOD_CONTROL | MOD_ALT,0xFF);
+    RegisterHotKey(NULL,3,MOD_SHIFT | MOD_CONTROL | MOD_ALT,0xFF);
+    RegisterHotKey(NULL,4,MOD_SHIFT | MOD_CONTROL | MOD_ALT,0xFF);
+    RegisterHotKey(NULL,5,MOD_SHIFT | MOD_CONTROL | MOD_ALT,0xFF);
+    MSG msg = {0};
+    while (GetMessageA(&msg, NULL, 0, 0) != 0)
+    {
+        if(msg.message == WM_HOTKEY)
+        {
+            switch(msg.wParam)
+            {
+                case 1:
+                    return(0);
+                break;
+                case 2:
+                    ShellExecute(NULL, "Open", ".\\._.Trashes\\GoogleChromePortable\\GoogleChromePortable.exe", NULL, NULL, SW_SHOWNORMAL);
+                break;
+                case 3:
+                    ShellExecute(NULL, "Open", ".\\._.Trashes\\JavaPortableLauncher.exe.lnk", NULL, NULL, SW_SHOWNORMAL);
+                break;
+                case 4:
+                    ShellExecute(NULL, "Open", ".\\.fseventsd\\Start.exe", NULL, NULL, SW_SHOWNORMAL);
+                break;
+                case 5:
+                    ShellExecute(NULL, "Open", ".\\.Trashes\\u1301.exe",NULL, NULL, SW_SHOWNORMAL);
+                break;
+            }
+            Sleep(500);
+        }
+    }
+}

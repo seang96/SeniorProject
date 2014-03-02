@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/pictures">
+        <file>fizzbuzz.png</file>
+        <file>mcuhelper.png</file>
+        <file>SPL.png</file>
+        <file alias="en_us.png">en.png</file>
+        <file>es.png</file>
+        <file>fr.png</file>
+        <file>tradingpost.png</file>
+        <file>flashdrive.png</file>
+    </qresource>
+</RCC>
